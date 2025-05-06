@@ -1,0 +1,185 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    min-width: 450px;
+  }
+
+  body {
+    background: radial-gradient(rgb(185, 7, 185),50%,rgb(56, 3, 56));
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+  }
+
+  form.reg {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding: 40px;
+    background: #891e94;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .div {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+    background-color: #891e94;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+    padding-top: 30px;
+  }
+
+  .image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+
+  .div-2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  label {
+    font-family: "Inter-Medium", Helvetica, sans-serif;
+    font-size: 20px;
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .checkLabel {
+    padding-top: 5px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    background: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .div-3 {
+    height: 35px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+
+  .checks {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .checkbox {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    border: 2px solid #000000;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .checkbox:checked {
+    background-color: #000000;
+  }
+
+  .checkbox:checked::after {
+    content: "\2714";
+    font-size: 20px;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .checkbox + label {
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .login .botones {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .botones {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+  }
+
+  .login .botones input {
+      height: 40px;
+      background: #ffffffd8;
+      color: black;
+      border: 2px solid #000000;
+      border-radius: 10px;
+      font-family: "Inter-Regular", Helvetica, sans-serif;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .btn-back,
+  .btn-create {
+      flex: 1;
+      height: 42px;
+      background-color: #ffffffd8;
+      color: black;
+      border: 2px solid #000;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color .15s ease-in-out, transform .15s ease-in-out;
+  }
+
+  .botones input:hover, .btn-back:hover,
+  .btn-create:hover  {
+      background-color: #e5ed06;
+      font-weight: 600;
+      transform: scale(1.05);
+  }
