@@ -65,7 +65,7 @@ body, html {
     background: var(--clr);
     transform-origin: bottom right;
     transform: rotate(calc(72deg * var(--i)));
-    clip-path: polygon(0 0, 78% 0, 100% 100%, 0 78%);
+    clip-path: polygon(0 0, 83% 0, 100% 100%, 0 83%);
     display: flex;
     justify-content: center;
     align-items: center;
