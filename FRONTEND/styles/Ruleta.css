@@ -1,0 +1,89 @@
+body, html {
+    background: #29272B;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.container .spinBtn{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #dddddd;
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.1em;
+    border: 4px solid rgba(0,0,0,0.75);
+}
+
+.container .spinBtn::before{
+    content: '';
+    position: absolute;
+    top: -20px;
+    width: 20px;
+    height: 30px;
+    background: #dddddd;
+    clip-path: polygon(50% 0%, 15% 100%, 85% 100%);
+}
+
+.container .wheel{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 5px #333,
+    0 0 0 15px #fff,
+    0 0 0 10px #111;
+    transition: transform 4s ease-in-out;
+}
+
+.container .wheel .category{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background: var(--clr);
+    transform-origin: bottom right;
+    transform: rotate(calc(72deg * var(--i)));
+    clip-path: polygon(0 0, 78% 0, 100% 100%, 0 78%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.container .wheel .category span{
+    position: relative;
+    transform: rotate(calc(45deg));
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 3px 3px 2px rgba(0,0,0,0.15);
+}
+
+.container .wheel .category span::after{
+    position: absolute;
+    font-size: 0.75em;
+    font-weight: 500;
+}
