@@ -21,6 +21,10 @@
     color: white;
 }
 
+.navbar {
+    background-color: #111013 !important;
+}
+
 .nav-link {
     border-radius: 10px;
     transition: background-color 0.3s;
@@ -40,6 +44,7 @@
     height: calc(100vh - 76px);
     display: flex;
     flex-direction: column;
+    background-color: #111013 !important;
 }
 #sidebar .link-text{display:none;} 
 

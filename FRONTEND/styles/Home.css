@@ -1,0 +1,24 @@
+body, html {
+    background: #29272B;
+}
+.carousel-inner {
+    height: 400px;
+}
+
+#carouselExampleControls {
+    max-width: 800px; /* Adjust to your desired maximum width */
+}
+
+.carousel-item img {
+    height: 100%; /* Make the image try to fill the height of the carousel-inner */
+    object-fit: cover; /* Crop the image to maintain aspect ratio and cover the entire container */
+    opacity: 60%;
+}
+
+#comenzarButton{
+    background-color: #EAFD19;
+    font: bold 25px/1.5 "Roboto", sans-serif;
+}
+.carousel-caption {
+    color: #000000 !important;
+}
