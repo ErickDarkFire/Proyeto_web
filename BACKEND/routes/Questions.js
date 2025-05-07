@@ -5,7 +5,7 @@ const express = require('express');
 const routerQuestions = express.Router();
 
 //-----------RUTAS PRINCIPALES-----------//
-routerQuestions.post('/', (req, res) => {
+routerQuestions.get('/:topic', (req, res) => {
     res.status(501).send('Not implemented.');
 })
 

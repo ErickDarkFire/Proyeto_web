@@ -21,3 +21,6 @@ let userSchema = mongoose.Schema({
     }
 });
 let User = mongoose.model('User', userSchema);
+
+//-----------EXPORTACIONES-----------//
+module.exports = User;
