@@ -17,22 +17,19 @@ db.on(`connecting`, () => {
 });
 db.on(`connected`, () => {
     console.log(dye.greenBright(`¡Conectado exitosamente!`));
+    app.listen(port, () => {
+        console.log(dye.underline.blackBright(`Proyecto corriendo en el puerto ${port}!`));
+    });
 });
 dye.level = 2;
 
 // MIDDLEWARE //
-app.use(express.static('FRONTEND'));
-app.use('/controllers', express.static('../FRONTEND/controllers'));
-app.use('/views', express.static('../FRONTEND/views'));
-app.use('/assets', express.static('../FRONTEND/assets'));
+app.use(express.static('../FRONTEND'));
 app.use(express.json());
 app.use(routerApi);
 
 // CONEXIÓN //
 mongoose.connect(mongoConnection);
-app.listen(port, () => {
-    console.log(dye.underline.blackBright(`Proyecto corriendo en el puerto ${port}!`));
-});
 
 
 

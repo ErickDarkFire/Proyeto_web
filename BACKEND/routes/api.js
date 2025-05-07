@@ -7,40 +7,40 @@ const routerApi = express.Router();
 const app = express();
 
 //-----------RUTAS EXTERNAS-----------//
-routerApi.use('/users', routerUsers);
-routerApi.use('/questions', routerQuestions);
+// routerApi.use('/users', routerUsers);
+// routerApi.use('/questions', routerQuestions);
 
 //-----------RUTAS PRINCIPALES-----------//
-routerApi.post('/login', login);
+// routerApi.post('/login', login);
 routerApi.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/Home.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Home.html'));
 });
 routerApi.get('/home.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/Home.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Home.html'));
 })
 routerApi.get('/EditProfile.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/EditProfile.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/EditProfile.html'));
 })
 routerApi.get('/leaderboard.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/leaderboard.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/leaderboard.html'));
 })
 routerApi.get('/login.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/login.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/login.html'));
 })
 routerApi.get('/Multiplayer.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/Multiplayer.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Multiplayer.html'));
 })
 routerApi.get('/Pregunta.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/Pregunta.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Pregunta.html'));
 })
 routerApi.get('/Profile.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/Profile.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Profile.html'));
 })
 routerApi.get('/Ruleta.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/Ruleta.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Ruleta.html'));
 })
 routerApi.get('/TYC.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '../../FRONTEND/views/TYC.html'));
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/TYC.html'));
 })
 
 //-----------EXPORTACIONES-----------//
