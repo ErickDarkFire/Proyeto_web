@@ -4,43 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="38f74c12-ecdb-429d-8ac6-e47310b5fdec" name="Changes" comment="Cambios en la ruleta">
-      <change afterPath="$PROJECT_DIR$/FRONTEND/views/TerminosYCondiciones.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/EditProfile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/assets/MultiPlayer.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/assets/MultiPlayer.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/assets/SinglePlayer.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/assets/SinglePlayer.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/assets/logo.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/assets/logo.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/EditProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/EditProfile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Multiplayer.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Multiplayer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Nav&amp;side.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Pregunta.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Pregunta.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Ruleta.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Ruleta.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/leaderboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/leaderboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/EditProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/EditProfile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Home.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Multiplayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Multiplayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Plantilla.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Plantilla.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Pregunta.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Pregunta.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Ruleta.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Ruleta.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/leaderboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/leaderboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/Login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/Plantilla.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/Profile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/assets/logo.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/leaderboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/EditProfile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/Nav&amp;side.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Nav&amp;side.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/Profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/leaderboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/transicion.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto_final/transicion.html" beforeDir="false" />
-    </list>
+    <list default="true" id="38f74c12-ecdb-429d-8ac6-e47310b5fdec" name="Changes" comment="Cambios en la ruleta" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +77,7 @@
       <workItem from="1746492880286" duration="19889000" />
       <workItem from="1746538469561" duration="1824000" />
       <workItem from="1746555246136" duration="808000" />
-      <workItem from="1746582174889" duration="983000" />
+      <workItem from="1746582174889" duration="1358000" />
     </task>
     <task id="LOCAL-00001" summary="Vista de Home">
       <option name="closed" value="true" />
