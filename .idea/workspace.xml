@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="38f74c12-ecdb-429d-8ac6-e47310b5fdec" name="Changes" comment="Cambios en la ruleta">
+      <change afterPath="$PROJECT_DIR$/FRONTEND/views/TerminosYCondiciones.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/EditProfile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/assets/MultiPlayer.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/assets/MultiPlayer.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/assets/SinglePlayer.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/assets/SinglePlayer.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/assets/logo.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/assets/logo.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/EditProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/EditProfile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Multiplayer.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Multiplayer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Nav&amp;side.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Pregunta.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Pregunta.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/Ruleta.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Ruleta.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/styles/leaderboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/leaderboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/EditProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/EditProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Home.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Multiplayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Multiplayer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Plantilla.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Plantilla.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Pregunta.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Pregunta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/Ruleta.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/Ruleta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/FRONTEND/views/leaderboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/views/leaderboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/Login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/Plantilla.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/Profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/assets/logo.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/leaderboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/EditProfile.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/Nav&amp;side.css" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/styles/Nav&amp;side.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/Profile.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/leaderboard.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/styles/transicion.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto_final/transicion.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ANAVARIUS&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ErickDarkFire/Proyeto_web.git&quot;,
+    &quot;accountId&quot;: &quot;c013c18d-7bb5-4492-8cd9-ac4b313e7341&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2whTbfggvEef87LiyQAEM6IO8Z1" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/ESCUELA/ITESO/CUARTO SEMESTRE/WEB/PROYECTO/Proyeto_web/FRONTEND/Vews",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ESCUELA\ITESO\CUARTO SEMESTRE\WEB\PROYECTO\Proyeto_web\FRONTEND\Vews" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ESCUELA\ITESO\CUARTO SEMESTRE\WEB\PROYECTO\Proyeto_web" />
+      <recent name="D:\ESCUELA\ITESO\CUARTO SEMESTRE\WEB\PROYECTO\Proyeto_web\FRONTEND\Vews" />
+      <recent name="D:\ESCUELA\ITESO\CUARTO SEMESTRE\WEB\PROYECTO\Proyeto_web\FRONTEND\Assets\css" />
+      <recent name="D:\ESCUELA\ITESO\CUARTO SEMESTRE\WEB\PROYECTO\Proyeto_web\FRONTEND\Assets" />
+      <recent name="D:\ESCUELA\ITESO\CUARTO SEMESTRE\WEB\PROYECTO\Proyeto_web\FRONTEND\Views" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.25659.40" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="38f74c12-ecdb-429d-8ac6-e47310b5fdec" name="Changes" comment="" />
+      <created>1746492879048</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746492879048</updated>
+      <workItem from="1746492880286" duration="19889000" />
+      <workItem from="1746538469561" duration="1824000" />
+      <workItem from="1746555246136" duration="808000" />
+      <workItem from="1746582174889" duration="983000" />
+    </task>
+    <task id="LOCAL-00001" summary="Vista de Home">
+      <option name="closed" value="true" />
+      <created>1746509227858</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746509227859</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Vista de Preguntas">
+      <option name="closed" value="true" />
+      <created>1746513198187</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1746513198187</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Vista de ruleta">
+      <option name="closed" value="true" />
+      <created>1746517131273</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746517131273</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Cambios en la ruleta">
+      <option name="closed" value="true" />
+      <created>1746538878552</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746538878552</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Vista de Home" />
+    <MESSAGE value="Vista de Preguntas" />
+    <MESSAGE value="Vista de ruleta" />
+    <MESSAGE value="Cambios en la ruleta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios en la ruleta" />
+  </component>
+</project>
