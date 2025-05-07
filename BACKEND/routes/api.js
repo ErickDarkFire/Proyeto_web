@@ -2,13 +2,14 @@
 const express = require('express');
 const path = require('path');
 const routerApi = express.Router();
-
-// CONFIGURACIÓN DE DEPENDENCIAS //
+const {routerUsers} = require('./Users.js');
+const {routerQuestions} = require('./Questions.js');
+//-----------CONFIGURACIÓN DE DEPENDENCIAS-----------//
 const app = express();
 
 //-----------RUTAS EXTERNAS-----------//
-// routerApi.use('/users', routerUsers);
-// routerApi.use('/questions', routerQuestions);
+routerApi.use('/users', routerUsers);
+routerApi.use('/questions', routerQuestions);
 
 //-----------RUTAS PRINCIPALES-----------//
 // routerApi.post('/login', login);

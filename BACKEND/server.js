@@ -1,14 +1,14 @@
-// IMPORTACIONES //
+//-----------IMPORTACIONES-----------//
 const express = require('express');
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 const routerApi = require('./routes/api.js');
 const dye = chalk.default;
 
-// CREDENCIALES //
+//-----------CREDENCIALES-----------//
 const mongoConnection = "mongodb+srv://diegogomezm:1QoAVlGjucuDovJ4@triviaverso.jvgmq0l.mongodb.net/";
 
-// CONFIGURACIÓN DE DEPENDENCIAS //
+//-----------CONFIGURACIÓN DE DEPENDENCIAS-----------//
 const app = express();
 const port = 3000;
 const db = mongoose.connection;
@@ -23,12 +23,12 @@ db.on(`connected`, () => {
 });
 dye.level = 2;
 
-// MIDDLEWARE //
+//-----------MIDDLEWARE-----------//
 app.use(express.static('../FRONTEND'));
 app.use(express.json());
 app.use(routerApi);
 
-// CONEXIÓN //
+//-----------CONEXIÓN-----------//
 mongoose.connect(mongoConnection);
 
 
