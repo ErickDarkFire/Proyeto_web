@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 const routerApi = require('./routes/api.js');
-const path = require('path');
 const dye = chalk.default;
 
 // CREDENCIALES //
@@ -12,7 +11,6 @@ const mongoConnection = "mongodb+srv://diegogomezm:1QoAVlGjucuDovJ4@triviaverso.
 // CONFIGURACIÓN DE DEPENDENCIAS //
 const app = express();
 const port = 3000;
-dye.level = 2;
 const db = mongoose.connection;
 db.on(`connecting`, () => {
     console.log(dye.yellow(`Conectando...`));
@@ -20,6 +18,7 @@ db.on(`connecting`, () => {
 db.on(`connected`, () => {
     console.log(dye.greenBright(`¡Conectado exitosamente!`));
 });
+dye.level = 2;
 
 // MIDDLEWARE //
 app.use(express.static('FRONTEND'));
