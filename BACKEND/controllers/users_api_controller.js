@@ -14,7 +14,7 @@ function createUser(req, res) {
         if (!name || !email || !password || !confirmPassword || points === undefined || points === null)
             res.status(400).send({"Error": "One or more parameters are missing."});
         else{
-            User.find({
+            User.findOne({
                 email: email
             }).then((docs) => {
                 if(docs)
