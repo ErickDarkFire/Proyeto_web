@@ -20,9 +20,24 @@ body, html {
     font: bold 25px/1.5 "Roboto", sans-serif;
 }
 .carousel-caption {
-    color: white !important ;
+    color: white;
 }
 
 .a{
     color: inherit;
+}
+
+#sidebar.expanded ~ .content{
+    margin-left:200px;
+}
+
+.entire{
+    display:flex;
+    flex-direction:column;
+    justify-content:center; 
+    align-items:center;  
+    background-color: #EAFD19;
+}
+.container{
+    margin-left: 60px;
 }

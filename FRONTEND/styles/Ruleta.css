@@ -88,3 +88,16 @@ body, html {
     font-size: 0.75em;
     font-weight: 500;
 }
+
+.center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 60px;
+    transition: margin-left 0.3s;
+}
+
+#sidebar.expanded ~ .center{
+    margin-left:200px;
+}

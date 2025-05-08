@@ -1,3 +1,19 @@
 body, html {
     background: #29272B;
 }
+
+.center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.space{
+    margin-left:60px;
+    transition: margin-left 0.3s;
+}
+
+#sidebar.expanded ~ .space{
+    margin-left:200px;
+}
