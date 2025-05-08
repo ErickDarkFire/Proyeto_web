@@ -36,6 +36,48 @@ function createUser(req, res) {
     }
 }
 
+function getUserInfo(req, res) {
+    User.findOne({
+        _id: req.params.id
+    }).then((response) => {
+        if(response)
+            res.status(200).send(response);
+        else
+            res.status(404).send({"Error": "User not found."});
+    }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
+
+function editUserInfo(req, res) {
+    try {
+        let id = req.params.id;
+        let validAttributes = ["name", "email", "password", "points"];
+        let updateData = {};
+        for (let attribute in req.body) {
+            if (validAttributes.includes(attribute))
+                updateData[attribute] = req.body[attribute];
+            else
+                return res.status(400).send({"Error": `Attribute ${attribute} is not part of the user schema.`});
+        }
+        if (Object.keys(updateData).length === 0) {
+            return res.status(400).send({"Error": "No attributes were provided."});
+        }
+        User.findByIdAndUpdate(
+            id,
+            {$set: updateData},
+            {new: true, runValidators: true}
+        ).then((response) => {
+            if (response) {
+                res.status(200).send(response);
+            } else {
+                res.status(404).send({"Error": "User not found."});
+            }
+        })
+    } catch(err) {
+        res.status(500).send({"Error": err.message});
+    }
+}
+
+//-----------FUNCIONES AUTENTICACIÓN-----------//
 function login(req, res) {
     let data = req.body;
     User.findOne({
@@ -50,4 +92,4 @@ function login(req, res) {
 }
 
 //-----------EXPORTACIONES-----------//
-module.exports = {createUser, login};
+module.exports = {createUser, login, getUserInfo, editUserInfo};
