@@ -19,8 +19,14 @@ function setRouellete(){
         div.style.setProperty('--i', i + 1);
         div.style.setProperty('--clr', colores[i % colores.length]);
         div.innerHTML = `<span>${categoria}</span>`;
-        ruleta.appendChild(div);
+        ruleta.appendChild(div);        
     });
+    let jugadores = parseInt(localStorage.getItem('totalJugadores'), 10) || 1;
+    if(jugadores != 1){
+        const turno = parseInt(localStorage.getItem('turno'), 10);
+        const h1 = document.getElementById('turno')
+        h1.textContent = `Turno del jugador: ${turno}`;
+    }
 }
 
 function spinRoullete(){
@@ -47,8 +53,15 @@ function transicion(){
 
 function incrementarRonda() {
     let actual = parseInt(localStorage.getItem('rondaActual'), 10) || 1;
-    actual += 1;
+    let rondaActualReal = parseInt(localStorage.getItem('rondaActualReal'), 10) || 1;
+    let jugadores = parseInt(localStorage.getItem('totalJugadores'), 10) || 1;
+    let turno = parseInt(localStorage.getItem('turno'), 10);
+    rondaActualReal +=1;
+    actual = Math.ceil(rondaActualReal/jugadores);
+    turno = ((rondaActualReal-1)%jugadores) + 1
     localStorage.setItem('rondaActual', actual);
+    localStorage.setItem('rondaActualReal', rondaActualReal);
+    localStorage.setItem('turno',turno);
 }
 
 function verificarFinDeJuego() {
@@ -115,6 +128,7 @@ function validarRespuesta(indiceSeleccionado) {
 }
 
 function setMatch(){
+    localStorage.clear();
     const input = document.querySelector('.input-rounds');
     const rondas = parseInt(input.value, 10);
     const jugadorSeleccionado = document.querySelector('input[name="players"]:checked');
@@ -126,6 +140,9 @@ function setMatch(){
     localStorage.setItem('totalJugadores', totalJugadores);
     if (!isNaN(rondas) && rondas > 0) {
         localStorage.setItem('totalRondas', rondas);
+        localStorage.setItem('rondasReales', rondas*totalJugadores);
+        localStorage.setItem('rondaActualReal', 1);
+        localStorage.setItem('turno',1)
         window.location.href = 'Ruleta.html';
     } else {
         alert('Por favor ingresa un número válido de rondas.');
