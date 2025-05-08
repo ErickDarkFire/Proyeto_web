@@ -6,7 +6,7 @@ const routerApi = require('./routes/api.js');
 const dye = chalk.default;
 
 //-----------CREDENCIALES-----------//
-const mongoConnection = "mongodb+srv://diegogomezm:1QoAVlGjucuDovJ4@triviaverso.jvgmq0l.mongodb.net/";
+const mongoConnection = "mongodb+srv://diegogomezm:1QoAVlGjucuDovJ4@triviaverso.jvgmq0l.mongodb.net/Triviaverso";
 
 //-----------CONFIGURACIÓN DE DEPENDENCIAS-----------//
 const app = express();

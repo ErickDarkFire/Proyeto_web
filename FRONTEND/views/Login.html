@@ -9,9 +9,9 @@
           form_register = document.getElementById('FormReg');
       if (form_register.style.display == 'none') {
         form_login.style.display = 'none';
-        form_register.style.display = 'flex'; // Importante: "flex" para que respete el centrado
+        form_register.style.display = 'flex'; 
       } else {
-        form_login.style.display = 'flex'; // Igual aquí
+        form_login.style.display = 'flex';
         form_register.style.display = 'none';
       }
     }
@@ -20,16 +20,16 @@
 
 <body>
   <div class="form-container">
-    <form action="Home.html" class="login" id="FormLogin">
+    <form action="" class="login" id="FormLogin">
       <div class="div">
         <img class="image" src="./../assets/logo.jpeg" />
         <div class="div-2">
           <label>Correo electrónico:</label>
-          <input type="email" class="div-3" required/>
+          <input type="email" class="div-3" name="email" required/>
         </div>
         <div class="div-2">
           <label>Contraseña:</label>
-          <input type="password" class="div-3" required/>
+          <input type="password" class="div-3" name="password" required/>
         </div>
         <div class="botones">
           <input type="submit" value="Iniciar sesión" />
@@ -38,10 +38,10 @@
       </div>
     </form>
 
-    <form action="Home.html" class="reg" id="FormReg" style="display: none;">
+    <form action="" class="reg" id="FormReg" style="display: none;">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required />
+        <input type="text" id="nombre" name="name" required />
       </div>
 
       <div class="form-group">

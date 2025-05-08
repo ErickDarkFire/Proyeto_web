@@ -6,7 +6,6 @@ const User = require('../models/user.js');
 //-----------FUNCIONES CRUD-----------//
 function createUser(req, res) {
     try{
-        console.table(req.body);
         let name = req.body.name,
             email = req.body.email,
             password = req.body.password,
@@ -15,19 +14,82 @@ function createUser(req, res) {
         if (!name || !email || !password || !confirmPassword || points === undefined || points === null)
             res.status(400).send({"Error": "One or more parameters are missing."});
         else{
-            let newUser = {
-                name: name,
-                email: email,
-                password: password,
-                points: points
-            }
-            let newUserMongoose = User(newUser);
-            newUserMongoose.save().then((doc) => {res.status(200).send(doc)});
+            User.findOne({
+                email: email
+            }).then((docs) => {
+                if(docs)
+                    res.status(401).send("An user with this email already exists");
+                else{
+                    let newUser = {
+                        name: name,
+                        email: email,
+                        password: password,
+                        points: points
+                    }
+                    let newUserMongoose = User(newUser);
+                    newUserMongoose.save().then((doc) => {res.status(200).send(doc)});
+                }
+            }).catch((err) => {res.status(500).send({"Error": err.message})});
         }
     } catch(err){
         res.status(500).send({"Error": err.message});
     }
-};
+}
+
+function getUserInfo(req, res) {
+    User.findOne({
+        _id: req.params.id
+    }).then((response) => {
+        if(response)
+            res.status(200).send(response);
+        else
+            res.status(404).send({"Error": "User not found."});
+    }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
+
+function editUserInfo(req, res) {
+    try {
+        let id = req.params.id;
+        let validAttributes = ["name", "email", "password", "points"];
+        let updateData = {};
+        for (let attribute in req.body) {
+            if (validAttributes.includes(attribute))
+                updateData[attribute] = req.body[attribute];
+            else
+                return res.status(400).send({"Error": `Attribute ${attribute} is not part of the user schema.`});
+        }
+        if (Object.keys(updateData).length === 0) {
+            return res.status(400).send({"Error": "No attributes were provided."});
+        }
+        User.findByIdAndUpdate(
+            id,
+            {$set: updateData},
+            {new: true, runValidators: true}
+        ).then((response) => {
+            if (response) {
+                res.status(200).send(response);
+            } else {
+                res.status(404).send({"Error": "User not found."});
+            }
+        })
+    } catch(err) {
+        res.status(500).send({"Error": err.message});
+    }
+}
+
+//-----------FUNCIONES AUTENTICACIÓN-----------//
+function login(req, res) {
+    let data = req.body;
+    User.findOne({
+        email: data.email,
+        password: data.password
+    }).then((docs) => {
+        if(docs)
+            res.status(200).send(docs);
+        else
+            res.status(404).send({"Error": "User not found."});
+    }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
 
 //-----------EXPORTACIONES-----------//
-module.exports = {createUser};
+module.exports = {createUser, login, getUserInfo, editUserInfo};
