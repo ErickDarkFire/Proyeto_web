@@ -58,7 +58,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a href="Login.html" class="nav-link text-white">
+                            <a href="" class="nav-link text-white" id="btnSalir">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span class="link-text ms-2">Salir</span>
                             </a>
@@ -69,16 +69,17 @@
                     <div id="banner" class="border-bottom border-3 border-dark">
                         <img src="./../assets/logo.jpeg" alt="profile_img" class="profile_pic">
                     </div>
-                    <form action="Profile.html" class="container datos">
+                    <form action="" class="container datos" id="FormEdit">
                         <div class="row g-4">
                           <div class="col-12 col-sm-6">
                             <label for="txtName" class="form-label">Nombre:</label>
-                            <input type="text" name="txtName" id="name" class="form-control" placeholder="Nuevo Nombre" required>
+                            <input type="text" name="name" id="txtName" class="form-control" placeholder="Nuevo Nombre" required>
                           </div>
                       
                           <div class="col-12 col-sm-6">
-                            <label for="txtCat" class="form-label">Categoría favorita:</label>
-                            <select class="form-select" id="categoria" name="cbcategoria" required>
+                            <label for="cbcategoria" class="form-label">Categoría favorita:</label>
+                            <select class="form-select" id="cbcategoria">
+                                <!-- <select class="form-select" id="cbcategoria" name="categoria" required> -->
                               <option selected disabled>Elige una categoría</option>
                                 <option value="Star-Wars">✨ Star Wars</option>
                                 <option value="Marvel">🦸 Marvel</option>
@@ -100,17 +101,18 @@
                           
                           <div class="col-12">
                             <label for="txtmsg" class="form-label">Mensaje:</label>
-                            <input type="text" name="txtmsg" id="msg" class="form-control" placeholder="Hola!" required>
+                            <input type="text" id="txtmsg" class="form-control" placeholder="Hola!">
+                            <!-- <input type="text" name="msg" id="txtmsg" class="form-control" placeholder="Hola!" required> -->
                           </div>
 
                           <div class="col-12 col-sm-6">
                             <label for="txtpass" class="form-label">Contraseña:</label>
-                            <input type="password" name="txtpass" id="pass" class="form-control" required>
+                            <input type="password" name="password" id="txtpass" class="form-control" required>
                           </div>
 
                           <div class="col-12 col-sm-6">
                             <label for="txtConfpass" class="form-label">Confirmar contraseña:</label>
-                            <input type="password" name="txtConfpass" id="confpass" class="form-control" required>
+                            <input type="password" name="confirm_password" id="txtConfpass" class="form-control" required>
                           </div>
                           
                           <div class="col-12 d-flex justify-content-center align-items-end gap-5 mt-4 mb-2">
@@ -147,5 +149,7 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+        <script src="../controllers/env.js"></script>
+        <script src="../controllers/Users_controller.js"></script>
     </body>
 </html>

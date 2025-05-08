@@ -35,43 +35,45 @@ const colores = [
 ];
 
 function validateLogin(){
-    if(!sessionStorage.user && window.location.href != local_url){
+    if(sessionStorage.user == null && (
+        window.location.href == local_url + '/Profile.html' ||
+        window.location.href == local_url + '/EditProfile.html' ||
+        window.location.href == local_url + '/leaderboard.html'
+    )){
         alert("Favor de iniciar sesión");
         window.location.href = local_url;
-    }
-    if(sessionStorage.user && window.location.href == local_url){
-        window.location.href = local_url+"/home.html";
     }
 }
 validateLogin();
 
 function init(){
+    //console.log(JSON.parse(sessionStorage.getItem('user')));
     let user_account = null;
-    
     //Comprobamos si esta registrdo on una cuenta
-    if(sessionStorage.getItem('user') != undefined) user_account = JSON.parse(sessionStorage.user);
+    if(sessionStorage.getItem('user') != null ) user_account = JSON.parse(sessionStorage.user);
     
     //Si estas en el leaderboard
     if(window.location.href == local_url+"leaderboard.html"){
-        if( user_account != undefined ){
+        if( user_account == undefined ){
             alert("Favor de iniciar sesión para ver el leaderboard");
             window.location.href = local_url + "home.html";
         }else{
-            let ranking = document.getElementById("ranking");
+            let ranking = document.getElementById("Ranking");
             if(ranking != undefined){
                 getRanking().then(rank => {
-                    for (let i = 0; i < 10 || i < rank.length ; i++) {
+                    for (let i = 0; i < 10 && i < rank.length ; i++) {
                         let tr = document.createElement('tr');
                         let tdpos = document.createElement('td');
                         let tdname = document.createElement('td');
                         let tdpoints = document.createElement('td');
                         tdpos.classList.add('text-center');
                         tdpoints.classList.add('text-center');
-                        tdpos.innerText = i;
+                        tdpos.innerText = i +1;
                         tdname.innerText = rank[i].name;
                         tdpoints.innerText = rank[i].points;
                         //Agregamos al usuario por posicion en el ranking
                         tr.append(tdpos,tdname,tdpoints);
+                        ranking.append(tr);
                     }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
             }
@@ -80,13 +82,14 @@ function init(){
 
     //Si estas en el profile
     if(window.location.href == local_url+"Profile.html"){
-        if( user_account != undefined ){
+        if( user_account == undefined ){
             alert("Favor de iniciar sesión para acceder a tu perfil");
             window.location.href = local_url + "home.html";
         }else{
             //obtenemos los componentes donde colocaremos la informacion
             let username = document.getElementById('username'),
                 usermsg = document.getElementById('usermsg'),
+                useremail = document.getElementById('useremail'),
                 usercatfav = document.getElementById('usercatfav'),
                 userpts = document.getElementById('userpts'),
                 userrank = document.getElementById('userrank'),
@@ -94,16 +97,17 @@ function init(){
 
                 //Colocamos los datos del usuario
                 username.innerText = user_account.name;
-                usermsg.innerText = user_account.message;
-                usercatfav.innerText = user_account.catfav;
-                userpts.innerText = user_account.points;
-                userrank.innerText = user_account.rank;
-                useraciertos.innerText = user_account.aciertos;
+                usermsg.innerHTML = '<b>Mensaje:</b> ' + user_account.message;
+                useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
+                usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.catfav;
+                userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
+                userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
+                useraciertos.innerHTML = '<b>Aciertos:</b> ' + user_account.aciertos;
                 
                 //dependiendo la categoria favorita, cambiamos el color del banner
                 let banner = document.getElementById('banner');
                 for (let i = 0; i < categorias.length; i++) {
-                    if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = purple;
+                    if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = colores[i];
                 }
 
                 //Obtenemos las preguntas que ya respondio
@@ -135,11 +139,11 @@ function init(){
                             i.classList.add('bi','fs-1');
                             if(question.status != true){
                                 quest.classList.add('wrong');
-                                i.classList.add('bi-check-circle');
+                                i.classList.add('bi-x-circle');
                             } 
                             else{
                                 quest.classList.add('right');
-                                i.classList.add('bi-x-circle');
+                                i.classList.add('bi-check-circle');
                             } 
                             flex.append(preg,i);
 
@@ -171,8 +175,8 @@ function init(){
 
     //Si estas en el EditProfile
     if(window.location.href == local_url+"EditProfile.html"){
-        if( user_account != undefined ){
-            alert("Favor de iniciar sesión para acceder a tu perfil");
+        if( user_account == undefined ){
+            alert("Favor de iniciar sesión para acceder a editar tu perfil");
             window.location.href = local_url + "home.html";
         }else{
             let txtName = document.getElementById('txtName'),
@@ -180,11 +184,10 @@ function init(){
                 txtmsg = document.getElementById('txtmsg'),
                 txtpass = document.getElementById('txtpass'),
                 txtConfpass = document.getElementById('txtConfpass');
-            
-            txtName.innerText = user_account.name;
-            txtmsg.innerText = user_account.message;
+            txtName.value = user_account.name;
+            txtmsg.value = user_account.message;
             cbcategoria.value = user_account.catfav;
-            txtpass.innerText = user_account.password;
+            txtpass.value = user_account.password;
         }
     }
 
@@ -203,29 +206,53 @@ function login(){
     })
     .then(response => {
         if(!response.ok) alert("Correo y/o Contraseña incorrectos.");
-        return response.json();
+        else return response.json();
     })
     .then(user =>{
         sessionStorage.setItem('user', JSON.stringify(user));
-        init();
+        /*let data = JSON.parse(sessionStorage.user);
+        console.log(data);
+        console.log(data._id);
+        console.log(data.name);*/
         window.location.href = local_url+'home.html';
     })
     .catch(err =>{
-        console.log('Error in login: ' + err);
+        console.log('No se encontro al usuario.');
     });
 
-}   
-
-let FormLogin = document.getElementById("FormLogin");
-if(FormLogin != undefined) FormLogin.addEventListener('submit', () => {
-    login();
-    alert("Presionaste el boton magico");
-});
-
-function logout(){
-    sessionStorage.clear();
-    window.location.href = local_url+'login.html';
 }
+let FormLogin = document.getElementById("FormLogin");
+if(FormLogin != undefined) FormLogin.addEventListener('submit', login);
+
+function register(){
+    event.preventDefault();
+    let data = new FormData(event.target);
+    data.append('points', 0);
+    console.log(data);
+    fetch('/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(data.entries()))
+    })
+    .then(async (response) => {
+        if(!response.ok) alert(await response.text()); 
+        return response.json();
+    })
+    .then(user => {
+        alert('Registro completado con exito!');
+        sessionStorage.setItem('user', JSON.stringify(user));
+        window.location.href = local_url+'home.html';
+    })
+    .catch(err => {
+        console.error('Error en login: ', err);
+    });
+
+}
+let FormReg = document.getElementById("FormReg");
+if(FormReg != undefined) FormReg.addEventListener('submit', register);
+
 
 async function getUser(){
     let user = await fetch('/users/' + sessionStorage.user.id, {
@@ -240,7 +267,7 @@ async function getUser(){
 }
 
 async function getHistorial(){
-    let his = await fetch('/histories/' + sessionStorage.user.id, {
+    let his = await fetch('/histories/' + JSON.parse(sessionStorage.user)._id, {
         method: 'GET'
     }).then(async (response) => {
         if(!response.ok) alert(await response.text());
@@ -262,6 +289,40 @@ async function getRanking(){
     });
     return record;
 }
+
+function user_update(){
+    let data_user = JSON.parse(sessionStorage.user);
+    event.preventDefault();
+    let data = new FormData(event.target);
+    if(data.get('password') == data.get('confirm_password') ){
+        data.delete('confirm_password');
+        fetch('/users/' + data_user._id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Object.fromEntries(data.entries()))
+        })
+        .then(async (response) => {
+            if(!response.ok) alert(await response.text());
+            return response.json();
+        })
+        .then(userUpdated => {
+            alert('Usuario actualizado con exito!!');
+            sessionStorage.setItem('user', JSON.stringify(userUpdated));
+            init();
+            //te devuelve a tu misma pestaña
+            window.location.href = local_url+'Profile.html';
+        })
+        .catch(err => {
+            console.error('Error al guardar datos: ', err);
+        });
+    }else{
+        alert('Las contraseñas no coinciden! No se realizo ningun cambio.');
+    }
+}
+let FormEdit = document.getElementById("FormEdit");
+if(FormEdit != undefined) FormEdit.addEventListener('submit', user_update);
 
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------
