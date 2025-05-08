@@ -32,13 +32,26 @@ function init(){
             
             //dependiendo la categoria favorita, cambiamos el color del banner
             let banner = document.getElementById('banner');
-            banner.style.backgroundColor = purple;
+            for (let i = 0; i < categorias.length; i++) {
+                if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = purple;
+            }
+
         });
     }
 
     //Si estas en el EditProfile
     if(window.location.href == local_url+"EditProfile.html"){
-        console.log("xd");
+        let txtName = document.getElementById('txtName'),
+            cbcategoria = document.getElementById('cbcategoria'),
+            txtmsg = document.getElementById('txtmsg'),
+            txtpass = document.getElementById('txtpass'),
+            txtConfpass = document.getElementById('txtConfpass');
+        
+        txtName.innerText = user_account.name;
+        txtmsg.innerText = user_account.message;
+        cbcategoria.value = user_account.catfav;
+        txtpass.innerText = user_account.password;
+        
     }
 
 }
