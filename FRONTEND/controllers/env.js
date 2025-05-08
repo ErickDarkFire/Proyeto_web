@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+const local_url = "http://localhost:3000/";
+=======
 const local_url = "http://localhost:3000/";
 
 const categorias = [
@@ -45,3 +48,4 @@ function validateLogin(){
     }
 }
 validateLogin();
+>>>>>>> 8f42686a97cabdeebe66dd3a69961249a3dada85

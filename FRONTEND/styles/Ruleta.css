@@ -8,13 +8,13 @@ body, html {
 
 .container{
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 450px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 100px;
-    margin-left: 35%;
+    margin-left: 30%;
 }
 
 .container .spinBtn{
@@ -66,7 +66,11 @@ body, html {
     background: var(--clr);
     transform-origin: bottom right;
     transform: rotate(calc(72deg * var(--i)));
+<<<<<<< HEAD
+    clip-path: polygon(0 0, 82% 0, 100% 100%, 0 82%);
+=======
     clip-path: polygon(0 0, 82% 0, 100% 100%, 0 80%);
+>>>>>>> 8f42686a97cabdeebe66dd3a69961249a3dada85
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,7 +81,7 @@ body, html {
 .container .wheel .category span{
     position: relative;
     transform: rotate(calc(45deg));
-    font-size: 1.2em;
+    font-size: 20px;
     font-weight: 700;
     color: #fff;
     text-shadow: px 3px 2px rgba(0,0,0,0.15);

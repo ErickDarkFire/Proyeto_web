@@ -64,6 +64,10 @@
 
                 <div class="center">
                     <div class="container">
+<<<<<<< HEAD
+                        <div class="spinBtn" id='spinBtn'></div>
+                            <div class="wheel" id="ruleta">
+=======
                         <div class="spinBtn"></div>
                             <div class="wheel">
                                 <div class="category" style="--i:1; --clr:#ff0059"><span>Anime</span></div>
@@ -71,6 +75,7 @@
                                 <div class="category" style="--i:3; --clr:#ff0000"><span>Series</span></div>
                                 <div class="category" style="--i:4; --clr:#26d500"><span>Videojuegos</span></div>
                                 <div class="category" style="--i:5; --clr:#ffee00"><span>Historia</span></div>
+>>>>>>> 8f42686a97cabdeebe66dd3a69961249a3dada85
                             </div>
                         </div>
                     </div>
@@ -95,13 +100,23 @@
                 integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
                 crossorigin="anonymous"></script>
         <script>
-            let roulette = document.querySelector(".wheel");
-            let spnbtn = document.querySelector(".spinBtn");
-            let value = Math.ceil(Math.random() * 3600);
-            spnbtn.onclick = () => {
-                roulette.style.transform = "rotate(" + value + "deg)";
-                value += Math.ceil(Math.random() * 3600);
-            }
         </script>
+        <div class="modal fade" id="categoriaModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoriaModalLabel">¡Categoría Seleccionada!</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <h3 id="categoriaGanadoraTexto" class="fw-bold"></h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-light" id='AceptarCategoria'>Aceptar</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="../controllers/env.js"></script>
+    <script src="../controllers/question.js"></script>
 </html>
