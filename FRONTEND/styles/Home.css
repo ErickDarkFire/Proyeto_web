@@ -6,7 +6,7 @@ body, html {
 }
 
 #carouselExampleControls {
-    max-width: 800px; /* Adjust to your desired maximum width */
+    max-width: 1000px; /* Adjust to your desired maximum width */
 }
 
 .carousel-item img {
@@ -36,8 +36,9 @@ body, html {
     flex-direction:column;
     justify-content:center; 
     align-items:center;  
-    background-color: #EAFD19;
 }
-.container{
-    margin-left: 60px;
+
+.row{
+    width: 100%;
+    justify-content:center; 
 }
