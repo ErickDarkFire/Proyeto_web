@@ -14,19 +14,40 @@ function createUser(req, res) {
         if (!name || !email || !password || !confirmPassword || points === undefined || points === null)
             res.status(400).send({"Error": "One or more parameters are missing."});
         else{
-            let newUser = {
-                name: name,
-                email: email,
-                password: password,
-                points: points
-            }
-            let newUserMongoose = User(newUser);
-            newUserMongoose.save().then((doc) => {res.status(200).send(doc)});
+            User.find({
+                email: email
+            }).then((docs) => {
+                if(docs)
+                    res.status(401).send("An user with this email already exists");
+                else{
+                    let newUser = {
+                        name: name,
+                        email: email,
+                        password: password,
+                        points: points
+                    }
+                    let newUserMongoose = User(newUser);
+                    newUserMongoose.save().then((doc) => {res.status(200).send(doc)});
+                }
+            }).catch((err) => {res.status(500).send({"Error": err.message})});
         }
     } catch(err){
         res.status(500).send({"Error": err.message});
     }
-};
+}
+
+function login(req, res) {
+    let data = req.body;
+    User.findOne({
+        email: data.email,
+        password: data.password
+    }).then((docs) => {
+        if(docs)
+            res.status(200).send(docs);
+        else
+            res.status(404).send({"Error": "User not found."});
+    }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
 
 //-----------EXPORTACIONES-----------//
-module.exports = {createUser};
+module.exports = {createUser, login};
