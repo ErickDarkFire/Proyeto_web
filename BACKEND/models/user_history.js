@@ -5,18 +5,20 @@ const mongoose = require('mongoose');
 let userHistorySchema = mongoose.Schema({
     questions: {
         type: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Question'
+            question: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Question'
+            },
+            correct: {
+                type: Boolean,
+            required: true
+            }
         }],
         required: true
     },
-    id: {
-        type: String,
-        required: true
-    },
-    correct: {
-        type: Boolean,
-        required: true
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 }, {
         collection: 'user_histories'
