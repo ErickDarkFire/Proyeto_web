@@ -1,3 +1,4 @@
 .idea
 BACKEND/node_modules
 BACKEND/.env
+FRONTEND/pruebas.HTTP
