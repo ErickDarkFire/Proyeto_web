@@ -45,6 +45,28 @@ function transicion(){
     modal.show();
 }
 
+function incrementarRonda() {
+    let actual = parseInt(localStorage.getItem('rondaActual'), 10) || 1;
+    actual += 1;
+    localStorage.setItem('rondaActual', actual);
+}
+
+function verificarFinDeJuego() {
+    const total = parseInt(localStorage.getItem('totalRondas'), 10);
+    const actual = parseInt(localStorage.getItem('rondaActual'), 10);
+    if (actual > total) {
+        localStorage.removeItem('rondaActual');
+        localStorage.removeItem('totalRondas');
+        window.location.href = 'Home.html'; 
+    }
+}
+
+function ruleta(){
+    const modal = bootstrap.Modal.getInstance(document.getElementById('resultadoModal'));
+    modal.hide();
+    window.location.href = `Ruleta.html`;
+}
+
 function play(){
     const modal = bootstrap.Modal.getInstance(document.getElementById('categoriaModal'));
     modal.hide();
@@ -57,7 +79,7 @@ function cargarPregunta() {
     let categoria = params.get("categoria"); 
     categoria = categoria.replace(/\s+/g, "").toLowerCase();
     console.log(categoria = categoria.replace(/\s+/g, ""));
-    fetch(`http://localhost:3000/questions/${categoria}`)
+    fetch(`http://localhost:3000/questions/new/${categoria}`)
         .then(r => { if (!r.ok) throw new Error(); return r.json(); })
         .then(data => {
         const title = categoria
@@ -88,13 +110,46 @@ function validarRespuesta(indiceSeleccionado) {
 
     const modal = new bootstrap.Modal(document.getElementById("resultadoModal"));
     modal.show();
+    incrementarRonda();
+    verificarFinDeJuego();
+}
+
+function setMatch(){
+    const input = document.querySelector('.input-rounds');
+    const rondas = parseInt(input.value, 10);
+    const jugadorSeleccionado = document.querySelector('input[name="players"]:checked');
+    if (!jugadorSeleccionado) {
+        alert("Por favor selecciona cuántas personas jugarán.");
+        return;
+    }
+    const totalJugadores = parseInt(jugadorSeleccionado.id.replace('players', ''), 10);
+    localStorage.setItem('totalJugadores', totalJugadores);
+    if (!isNaN(rondas) && rondas > 0) {
+        localStorage.setItem('totalRondas', rondas);
+        window.location.href = 'Ruleta.html';
+    } else {
+        alert('Por favor ingresa un número válido de rondas.');
+    }
+}
+
+function mostrarProgresoRonda() {
+    const total = parseInt(localStorage.getItem('totalRondas'), 10);
+    const actual = parseInt(localStorage.getItem('rondaActual'), 10);
+
+    if (!isNaN(total) && !isNaN(actual)) {
+        document.getElementById('infoRonda').textContent = `Ronda ${actual} de ${total}`;
+    }
 }
 
 function init(){
+    if (!localStorage.getItem('rondaActual')) {
+        localStorage.setItem('rondaActual', 1);
+    }
     if(window.location.href == local_url + 'Ruleta.html'){
         setRouellete();
+        mostrarProgresoRonda()
     }
-    else{
+    if(window.location.href.includes(local_url + 'pregunta.html')){
         cargarPregunta();
     }
 }
@@ -104,3 +159,5 @@ init();
 document.getElementById('spinBtn')?.addEventListener('click', spinRoullete);
 document.querySelector(".wheel")?.addEventListener("transitionend", transicion);
 document.getElementById('AceptarCategoria')?.addEventListener('click', play);
+document.getElementById('AceptarRuleta')?.addEventListener('click', ruleta);
+document.getElementById('btnContinuar')?.addEventListener('click',setMatch);
