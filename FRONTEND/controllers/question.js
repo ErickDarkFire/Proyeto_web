@@ -57,7 +57,7 @@ function cargarPregunta() {
     let categoria = params.get("categoria"); 
     categoria = categoria.replace(/\s+/g, "").toLowerCase();
     console.log(categoria = categoria.replace(/\s+/g, ""));
-    fetch(`http://localhost:3000/questions/${categoria}`)
+    fetch(`http://localhost:3000/questions/new/${categoria}`)
         .then(r => { if (!r.ok) throw new Error(); return r.json(); })
         .then(data => {
         const title = categoria

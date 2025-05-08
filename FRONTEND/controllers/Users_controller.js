@@ -34,8 +34,12 @@ const colores = [
     "#FFF700"
 ];
 
-/*function validateLogin(){
-    if(!sessionStorage.user && window.location.href != local_url){
+function validateLogin(){
+    if(!sessionStorage.user && (
+        window.location.href == local_url + '/Profile.html' ||
+        window.location.href == local_url + '/EditProfile.html' ||
+        window.location.href == local_url + '/leaderboard.html'
+    )){
         alert("Favor de iniciar sesión");
         window.location.href = local_url;
     }
@@ -43,7 +47,7 @@ const colores = [
         window.location.href = local_url+"/home.html";
     }
 }
-validateLogin();*/
+validateLogin();
 
 function init(){
     let user_account = null;
@@ -202,29 +206,61 @@ function login(){
     })
     .then(response => {
         if(!response.ok) alert("Correo y/o Contraseña incorrectos.");
-        return response.json();
+        else return response.json();
     })
     .then(user =>{
         sessionStorage.setItem('user', JSON.stringify(user));
+        /*let data = JSON.parse(sessionStorage.user);
+        console.log(data);
+        console.log(data._id);
+        console.log(data.name);*/
         init();
         window.location.href = local_url+'home.html';
     })
     .catch(err =>{
-        console.log('Error in login: ' + err);
+        console.log('No se encontro al usuario.');
     });
 
-}   
-
-alert("Presionaste el boton magico");
+}
 let FormLogin = document.getElementById("FormLogin");
-if(FormLogin != undefined) FormLogin.addEventListener('submit', () => {
-    login();
-});
+if(FormLogin != undefined) FormLogin.addEventListener('submit', login);
+
+function register(){
+    event.preventDefault();
+    let data = new FormData(event.target);
+    data.append('points', 0);
+    console.log(data);
+    fetch('/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(data.entries()))
+    })
+    .then(async (response) => {
+        if(!response.ok) alert(await response.text()); 
+        return response.json();
+    })
+    .then(user => {
+        alert('Registro completado con exito!');
+        sessionStorage.setItem('user', JSON.stringify(user));
+        window.location.href = local_url+'home.html';
+    })
+    .catch(err => {
+        console.error('Error en login: ', err);
+    });
+
+}
+let FormReg = document.getElementById("FormReg");
+if(FormReg != undefined) FormReg.addEventListener('submit', register);
+
 
 function logout(){
     sessionStorage.clear();
     window.location.href = local_url+'login.html';
 }
+let btnSalir = document.getElementById("btnSalir");
+if(btnSalir != undefined) btnSalir.addEventListener('submit', logout);
 
 async function getUser(){
     let user = await fetch('/users/' + sessionStorage.user.id, {
