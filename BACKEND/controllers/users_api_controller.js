@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const UserHistory = require('../models/user_history.js');
 const User = require('../models/user.js');
+const {response} = require("express");
 
 //-----------FUNCIONES CRUD-----------//
 function createUser(req, res) {
@@ -11,14 +12,16 @@ function createUser(req, res) {
             password = req.body.password,
             confirmPassword = req.body["confirm_password"],
             points = req.body.points;
-        if (!name || !email || !password || !confirmPassword || points === undefined || points === null)
+        if (!name || !email || !password || !confirmPassword || points === undefined || points === null || isNaN(points))
             res.status(400).send({"Error": "One or more parameters are missing."});
+        else if(password !== confirmPassword)
+            res.status(400).send({"Error": "Passwords do not match."});
         else{
             User.findOne({
                 email: email
             }).then((docs) => {
                 if(docs)
-                    res.status(401).send("An user with this email already exists");
+                    res.status(409).send("An user with this email already exists");
                 else{
                     let newUser = {
                         name: name,
@@ -27,7 +30,15 @@ function createUser(req, res) {
                         points: points
                     }
                     let newUserMongoose = User(newUser);
-                    newUserMongoose.save().then((doc) => {res.status(200).send(doc)});
+                    newUserMongoose.save().then((doc) => {
+                        const userID = doc._id;
+                        let newUserHistory = UserHistory({questions: [], id: userID});
+                        newUserHistory.save().then((newDoc) => {
+                            res.status(201).send(doc)}).catch((err) => {
+                            User.findByIdAndDelete(userID);
+                            res.status(500).send({"Error": err.message});
+                        })
+                    })
                 }
             }).catch((err) => {res.status(500).send({"Error": err.message})});
         }
@@ -77,6 +88,60 @@ function editUserInfo(req, res) {
     }
 }
 
+function deleteUser(req, res) {
+    let id = req.params.id;
+    User.findByIdAndDelete(id).then((response) => {
+        if (response)
+            res.status(200).json({message: 'User deleted succesfully', user: response});
+        else
+            res.status(404).send({"Error": "User not found."});
+    }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
+
+function getTopUsers(req, res) {
+    let top = req.query.top;
+    if (!top || isNaN(top) || parseInt(top) <= 0) {
+        return res.status(400).send({ "Error": "Please provide a valid positive number for 'top' query parameter." });
+    }
+    const limit = parseInt(top);
+    User.find({})
+        .sort({ points: -1 })
+        .limit(limit)
+        .then((topUsers) => {
+            res.status(200).send(topUsers);
+        })
+        .catch((err) => {
+            res.status(500).send({ "Error": "An internal server error occurred while fetching top users." });
+        });
+}
+
+function getUserHistory(req, res) {
+    UserHistory.findOne({
+        user_id: req.params.id
+    }).then((response) => {
+        if(response)
+            res.status(200).send(response);
+        else
+            res.status(404).send({"Error": "History not found."});
+    }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
+
+function addUserHistory(req, res) {
+   let questionID = req.body.question;
+   let correct = req.body.correct;
+   let updateData = {questions: {question: questionID, correct: correct}};
+   UserHistory.findOneAndUpdate({user_id: req.params.id},
+                         {$push: updateData},
+                         {new: true, runValidators: true})
+       .then((response) => {
+           if (response) {
+               res.status(200).send(response);
+           } else {
+               res.status(404).send({"Error": "History not found."});
+           }
+       }).catch((err) => {res.status(500).send({"Error": err.message})});
+}
+
 //-----------FUNCIONES AUTENTICACIÓN-----------//
 function login(req, res) {
     let data = req.body;
@@ -92,4 +157,4 @@ function login(req, res) {
 }
 
 //-----------EXPORTACIONES-----------//
-module.exports = {createUser, login, getUserInfo, editUserInfo};
+module.exports = {createUser, login, getUserInfo, editUserInfo, deleteUser, getUserHistory, addUserHistory, getTopUsers};
