@@ -6,7 +6,6 @@ const User = require('../models/user.js');
 //-----------FUNCIONES CRUD-----------//
 function createUser(req, res) {
     try{
-        console.table(req.body);
         let name = req.body.name,
             email = req.body.email,
             password = req.body.password,
