@@ -10,8 +10,26 @@ function init(){
         if( user_account != undefined ){
             alert("Favor de iniciar sesión para ver el leaderboard");
             window.location.href = local_url + "home.html";
+        }else{
+            let ranking = document.getElementById("ranking");
+            if(ranking != undefined){
+                getRanking().then(rank => {
+                    for (let i = 0; i < 10 || i < rank.length ; i++) {
+                        let tr = document.createElement('tr');
+                        let tdpos = document.createElement('td');
+                        let tdname = document.createElement('td');
+                        let tdpoints = document.createElement('td');
+                        tdpos.classList.add('text-center');
+                        tdpoints.classList.add('text-center');
+                        tdpos.innerText = i;
+                        tdname.innerText = rank[i].name;
+                        tdpoints.innerText = rank[i].points;
+                        //Agregamos al usuario por posicion en el ranking
+                        tr.append(tdpos,tdname,tdpoints);
+                    }
+                }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
+            }
         }
-        console.log("xd");
     }
 
     //Si estas en el profile
@@ -182,6 +200,18 @@ async function getHistorial(){
         console.error("Fallo al obtener el historial del usuario: " + err)
     });
     return his;
+}
+
+async function getRanking(){
+    let record = await fetch('/rank?top=10', {
+        method: 'GET'
+    }).then(async (response) => {
+        if(!response.ok) alert(await response.text());
+        return await response.json();
+    }).catch(err =>{
+        console.error("Fallo al obtener el top de usuarios: " + err)
+    });
+    return record;
 }
 
 //--------------------------------------------------------------------
