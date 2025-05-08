@@ -35,7 +35,7 @@ const colores = [
 ];
 
 function validateLogin(){
-    if(!sessionStorage.user && (
+    if(sessionStorage.user == null && (
         window.location.href == local_url + '/Profile.html' ||
         window.location.href == local_url + '/EditProfile.html' ||
         window.location.href == local_url + '/leaderboard.html'
@@ -43,13 +43,11 @@ function validateLogin(){
         alert("Favor de iniciar sesión");
         window.location.href = local_url;
     }
-    if(sessionStorage.user && window.location.href == local_url){
-        window.location.href = local_url+"/home.html";
-    }
 }
 validateLogin();
 
 function init(){
+    //console.log(JSON.parse(sessionStorage.getItem('user')));
     let user_account = null;
     //Comprobamos si esta registrdo on una cuenta
     if(sessionStorage.getItem('user') != null ) user_account = JSON.parse(sessionStorage.user);
@@ -60,7 +58,7 @@ function init(){
             alert("Favor de iniciar sesión para ver el leaderboard");
             window.location.href = local_url + "home.html";
         }else{
-            let ranking = document.getElementById("ranking");
+            let ranking = document.getElementById("Ranking");
             if(ranking != undefined){
                 getRanking().then(rank => {
                     for (let i = 0; i < 10 && i < rank.length ; i++) {
@@ -70,11 +68,12 @@ function init(){
                         let tdpoints = document.createElement('td');
                         tdpos.classList.add('text-center');
                         tdpoints.classList.add('text-center');
-                        tdpos.innerText = i;
+                        tdpos.innerText = i +1;
                         tdname.innerText = rank[i].name;
                         tdpoints.innerText = rank[i].points;
                         //Agregamos al usuario por posicion en el ranking
                         tr.append(tdpos,tdname,tdpoints);
+                        ranking.append(tr);
                     }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
             }
@@ -83,13 +82,14 @@ function init(){
 
     //Si estas en el profile
     if(window.location.href == local_url+"Profile.html"){
-        if( user_account != undefined ){
+        if( user_account == undefined ){
             alert("Favor de iniciar sesión para acceder a tu perfil");
             window.location.href = local_url + "home.html";
         }else{
             //obtenemos los componentes donde colocaremos la informacion
             let username = document.getElementById('username'),
                 usermsg = document.getElementById('usermsg'),
+                useremail = document.getElementById('useremail'),
                 usercatfav = document.getElementById('usercatfav'),
                 userpts = document.getElementById('userpts'),
                 userrank = document.getElementById('userrank'),
@@ -97,11 +97,12 @@ function init(){
 
                 //Colocamos los datos del usuario
                 username.innerText = user_account.name;
-                usermsg.innerText = user_account.message;
-                usercatfav.innerText = user_account.catfav;
-                userpts.innerText = user_account.points;
-                userrank.innerText = user_account.rank;
-                useraciertos.innerText = user_account.aciertos;
+                usermsg.innerHTML = '<b>Mensaje:</b> ' + user_account.message;
+                useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
+                usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.catfav;
+                userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
+                userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
+                useraciertos.innerHTML = '<b>Aciertos:</b> ' + user_account.aciertos;
                 
                 //dependiendo la categoria favorita, cambiamos el color del banner
                 let banner = document.getElementById('banner');
@@ -174,8 +175,8 @@ function init(){
 
     //Si estas en el EditProfile
     if(window.location.href == local_url+"EditProfile.html"){
-        if( user_account != undefined ){
-            alert("Favor de iniciar sesión para acceder a tu perfil");
+        if( user_account == undefined ){
+            alert("Favor de iniciar sesión para acceder a editar tu perfil");
             window.location.href = local_url + "home.html";
         }else{
             let txtName = document.getElementById('txtName'),
@@ -183,7 +184,6 @@ function init(){
                 txtmsg = document.getElementById('txtmsg'),
                 txtpass = document.getElementById('txtpass'),
                 txtConfpass = document.getElementById('txtConfpass');
-            
             txtName.value = user_account.name;
             txtmsg.value = user_account.message;
             cbcategoria.value = user_account.catfav;
@@ -214,7 +214,6 @@ function login(){
         console.log(data);
         console.log(data._id);
         console.log(data.name);*/
-        init();
         window.location.href = local_url+'home.html';
     })
     .catch(err =>{
@@ -255,13 +254,6 @@ let FormReg = document.getElementById("FormReg");
 if(FormReg != undefined) FormReg.addEventListener('submit', register);
 
 
-function logout(){
-    sessionStorage.clear();
-    window.location.href = local_url+'login.html';
-}
-let btnSalir = document.getElementById("btnSalir");
-if(btnSalir != undefined) btnSalir.addEventListener('submit', logout);
-
 async function getUser(){
     let user = await fetch('/users/' + sessionStorage.user.id, {
         method: 'GET'
@@ -275,7 +267,7 @@ async function getUser(){
 }
 
 async function getHistorial(){
-    let his = await fetch('/histories/' + sessionStorage.user.id, {
+    let his = await fetch('/histories/' + JSON.parse(sessionStorage.user)._id, {
         method: 'GET'
     }).then(async (response) => {
         if(!response.ok) alert(await response.text());
@@ -297,6 +289,40 @@ async function getRanking(){
     });
     return record;
 }
+
+function user_update(){
+    let data_user = JSON.parse(sessionStorage.user);
+    event.preventDefault();
+    let data = new FormData(event.target);
+    if(data.get('password') == data.get('confirm_password') ){
+        data.delete('confirm_password');
+        fetch('/users/' + data_user._id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Object.fromEntries(data.entries()))
+        })
+        .then(async (response) => {
+            if(!response.ok) alert(await response.text());
+            return response.json();
+        })
+        .then(userUpdated => {
+            alert('Usuario actualizado con exito!!');
+            sessionStorage.setItem('user', JSON.stringify(userUpdated));
+            init();
+            //te devuelve a tu misma pestaña
+            window.location.href = local_url+'Profile.html';
+        })
+        .catch(err => {
+            console.error('Error al guardar datos: ', err);
+        });
+    }else{
+        alert('Las contraseñas no coinciden! No se realizo ningun cambio.');
+    }
+}
+let FormEdit = document.getElementById("FormEdit");
+if(FormEdit != undefined) FormEdit.addEventListener('submit', user_update);
 
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------

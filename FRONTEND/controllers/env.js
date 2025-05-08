@@ -1,6 +1,11 @@
-<<<<<<< HEAD
 const local_url = "http://localhost:3000/";
 
-=======
-const local_url = "http://localhost:3000/";
->>>>>>> 7d35347709ed89783cd78f86f41225b2b9934b9e
+function logout(){
+    event.preventDefault(); // Esto evita que el enlace recargue la página
+    sessionStorage.removeItem('user');
+    sessionStorage.clear();
+    user_account = null;
+    window.location.href = local_url+'login.html';
+}
+let btnSalir = document.getElementById("btnSalir");
+if(btnSalir != undefined) btnSalir.addEventListener('click',logout);
