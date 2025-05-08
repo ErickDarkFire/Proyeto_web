@@ -32,7 +32,7 @@ function createUser(req, res) {
                     let newUserMongoose = User(newUser);
                     newUserMongoose.save().then((doc) => {
                         const userID = doc._id;
-                        let newUserHistory = UserHistory({questions: [], id: userID});
+                        let newUserHistory = UserHistory({questions: [], user_id: userID});
                         newUserHistory.save().then((newDoc) => {
                             res.status(201).send(doc)}).catch((err) => {
                             User.findByIdAndDelete(userID);

@@ -1,3 +1,49 @@
+const categorias = [
+    "Star-Wars", 
+    "Marvel", 
+    "Dragon-Ball",
+    "Naruto",
+    "One-Piece",
+    "Death-Note",
+    "Pokemon",
+    "Inazuma-Eleven",
+    "League-Of-Legends",
+    "Zelda",
+    "Minecraft",
+    "Mario",
+    "Halo",
+    "Gears-Of-War",
+    "Bob-Esponja"
+];
+
+const colores = [
+    "#FFE81F",
+    "#ED1D24",
+    "#F77F00",
+    "#F08C00",
+    "#1E90FF",
+    "#000000",
+    "#FFCB05",
+    "#FF6600",
+    "#C89B3C",
+    "#007C41",
+    "#6E8B3D",
+    "#E60012",
+    "#4B5320",
+    "#8B0000",
+    "#FFF700"
+];
+
+function validateLogin(){
+    if(!sessionStorage.user && window.location.href != local_url){
+        alert("Favor de iniciar sesión");
+        window.location.href = local_url;
+    }
+    if(sessionStorage.user && window.location.href == local_url){
+        window.location.href = local_url+"/home.html";
+    }
+}
+validateLogin();
 
 function init(){
     let user_account = null;
@@ -171,7 +217,10 @@ function login(){
 }   
 
 let FormLogin = document.getElementById("FormLogin");
-if(FormLogin != undefined) FormLogin.addEventListener('submit', login);
+if(FormLogin != undefined) FormLogin.addEventListener('submit', () => {
+    login();
+    alert("Presionaste el boton magico");
+});
 
 function logout(){
     sessionStorage.clear();
