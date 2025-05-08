@@ -90,14 +90,14 @@
                         </div>
 
                         <div class="col">
-                            <a id="opcion2" href="your-target-page.html" class="btn btn-primary btn-lg d-block h-100 text-center py-4 py-sm-5">
+                            <a id="opcion2" class="btn btn-primary btn-lg d-block h-100 text-center py-4 py-sm-5">
                                 <span class="d-flex align-items-center justify-content-center h-100">
                                     RESPUESTA 2
                                 </span>
                             </a>
                         </div>
                         <div class="col">
-                            <a id="opcion3" href="your-target-page.html" class="btn btn-success btn-lg d-block h-100 text-center py-4 py-sm-5">
+                            <a id="opcion3" class="btn btn-success btn-lg d-block h-100 text-center py-4 py-sm-5">
                                 <span class="d-flex align-items-center justify-content-center h-100">
                                     RESPUESTA 3
                                 </span>
@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="col">
-                            <a id="opcion4" href="your-target-page.html" class="btn btn-warning btn-lg d-block h-100 text-center py-4 py-sm-5">
+                            <a id="opcion4" class="btn btn-warning btn-lg d-block h-100 text-center py-4 py-sm-5">
                                 <span class="d-flex align-items-center justify-content-center h-100">
                                     RESPUESTA 4
                                 </span>
@@ -131,5 +131,23 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
                 integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
                 crossorigin="anonymous"></script>
+                <div class="modal fade" id="resultadoModal" tabindex="-1" aria-labelledby="resultadoModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content text-white bg-dark">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resultadoModalLabel">Resultado</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h3 id="textoResultado"></h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Continuar</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
     </body>
+    <script src="../controllers/env.js"></script>
+    <script src="../controllers/question.js"></script>
 </html>
