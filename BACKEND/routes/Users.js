@@ -1,21 +1,14 @@
 //-----------IMPORTACIONES-----------//
 const express = require('express');
-const {createUser} = require('../controllers/users_api_controller.js');
+const {createUser, getUserInfo, editUserInfo} = require('../controllers/users_api_controller.js');
 
 //-----------CONFIGURACIÓN DE DEPENDENCIAS-----------//
 const routerUsers = express.Router();
 
 //-----------RUTAS USERS-----------//
 routerUsers.post('/', createUser);
-routerUsers.get('/', (req, res) => {
-    res.status(501).send('Not implemented.');
-})
-routerUsers.get('/:id', (req, res) => {
-    res.status(501).send('Not implemented.');
-})
-routerUsers.patch('/:id', (req, res) => {
-    res.status(501).send('Not implemented.');
-})
+routerUsers.get('/:id', getUserInfo);
+routerUsers.patch('/:id', editUserInfo);
 routerUsers.delete('/:id', (req, res) => {
     res.status(501).send('Not implemented.');
 })
