@@ -4,6 +4,7 @@
     "express": "^5.1.0",
     "mongoose": "^8.14.1",
     "nodemon": "^3.1.10",
+    "openai": "^4.97.0",
     "package.json": "^2.0.1"
   }
 }
