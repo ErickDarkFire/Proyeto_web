@@ -1,4 +1,4 @@
-const local_url = "http://localhost:3000/"
+const local_url = "http://localhost:3000/";
 
 function validateLogin(){
     if(!sessionStorage.user && window.location.href != local_url){
