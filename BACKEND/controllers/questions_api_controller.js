@@ -4,7 +4,6 @@ const openAI = require("openai")
 const Question = require('../models/question.js');
 const User = require("../models/user");
 const {Mongoose} = require("mongoose");
-// const openAIClient = new openAI({apiKey: ""});
 
 //-----------FUNCIONES CRUD-----------//
 function getNewQuestion(req, res) {
