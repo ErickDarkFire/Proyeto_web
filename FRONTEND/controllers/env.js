@@ -1,10 +1,9 @@
 const local_url = "http://localhost:3000/";
 
-<<<<<<< HEAD
-=======
+
 const categorias = [
-    "Star-Wars", 
-    "Marvel", 
+    "Star-Wars",
+    "Marvel",
     "Dragon-Ball",
     "Naruto",
     "One-Piece",
@@ -47,4 +46,3 @@ function validateLogin(){
     }
 }
 validateLogin();
->>>>>>> 63f245cecb15c62455c2e29325414f72439c209d
