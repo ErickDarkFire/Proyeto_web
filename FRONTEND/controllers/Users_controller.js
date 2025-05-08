@@ -34,7 +34,7 @@ const colores = [
     "#FFF700"
 ];
 
-function validateLogin(){
+/*function validateLogin(){
     if(!sessionStorage.user && window.location.href != local_url){
         alert("Favor de iniciar sesión");
         window.location.href = local_url;
@@ -43,24 +43,23 @@ function validateLogin(){
         window.location.href = local_url+"/home.html";
     }
 }
-validateLogin();
+validateLogin();*/
 
 function init(){
     let user_account = null;
-    
     //Comprobamos si esta registrdo on una cuenta
-    if(sessionStorage.getItem('user') != undefined) user_account = JSON.parse(sessionStorage.user);
+    if(sessionStorage.getItem('user') != null ) user_account = JSON.parse(sessionStorage.user);
     
     //Si estas en el leaderboard
     if(window.location.href == local_url+"leaderboard.html"){
-        if( user_account != undefined ){
+        if( user_account == undefined ){
             alert("Favor de iniciar sesión para ver el leaderboard");
             window.location.href = local_url + "home.html";
         }else{
             let ranking = document.getElementById("ranking");
             if(ranking != undefined){
                 getRanking().then(rank => {
-                    for (let i = 0; i < 10 || i < rank.length ; i++) {
+                    for (let i = 0; i < 10 && i < rank.length ; i++) {
                         let tr = document.createElement('tr');
                         let tdpos = document.createElement('td');
                         let tdname = document.createElement('td');
@@ -103,7 +102,7 @@ function init(){
                 //dependiendo la categoria favorita, cambiamos el color del banner
                 let banner = document.getElementById('banner');
                 for (let i = 0; i < categorias.length; i++) {
-                    if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = purple;
+                    if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = colores[i];
                 }
 
                 //Obtenemos las preguntas que ya respondio
@@ -135,11 +134,11 @@ function init(){
                             i.classList.add('bi','fs-1');
                             if(question.status != true){
                                 quest.classList.add('wrong');
-                                i.classList.add('bi-check-circle');
+                                i.classList.add('bi-x-circle');
                             } 
                             else{
                                 quest.classList.add('right');
-                                i.classList.add('bi-x-circle');
+                                i.classList.add('bi-check-circle');
                             } 
                             flex.append(preg,i);
 
@@ -181,10 +180,10 @@ function init(){
                 txtpass = document.getElementById('txtpass'),
                 txtConfpass = document.getElementById('txtConfpass');
             
-            txtName.innerText = user_account.name;
-            txtmsg.innerText = user_account.message;
+            txtName.value = user_account.name;
+            txtmsg.value = user_account.message;
             cbcategoria.value = user_account.catfav;
-            txtpass.innerText = user_account.password;
+            txtpass.value = user_account.password;
         }
     }
 
@@ -216,10 +215,10 @@ function login(){
 
 }   
 
+alert("Presionaste el boton magico");
 let FormLogin = document.getElementById("FormLogin");
 if(FormLogin != undefined) FormLogin.addEventListener('submit', () => {
     login();
-    alert("Presionaste el boton magico");
 });
 
 function logout(){
