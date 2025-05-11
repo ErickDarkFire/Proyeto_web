@@ -183,3 +183,8 @@ input[type="password"] {
     font-weight: 600;
     transform: scale(1.05);
 }
+
+a{
+    color:yellow;
+    font-weight: 600;
+}

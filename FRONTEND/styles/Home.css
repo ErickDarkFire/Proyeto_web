@@ -16,9 +16,17 @@ body, html {
 }
 
 #comenzarButton{
-    background-color: #EAFD19;
+    background-color: #7b2cbf;
+    color: white;
     font: bold 25px/1.5 "Roboto", sans-serif;
 }
+
+#comenzarButton:hover{
+    background-color: #EAFD19;
+    color: black;
+    transform: scale(1.2);
+}
+
 .carousel-caption {
     color: white;
 }

@@ -17,3 +17,41 @@ body, html {
 #sidebar.expanded ~ .space{
     margin-left:200px;
 }
+
+.barra{
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    border: 5px black solid;
+    border-radius: 20px;
+    width: 80%;
+    height: 25px;
+    overflow: hidden;
+}
+.progreso{
+    display: block;
+    width: 0px;
+    height: 100%;
+    border-radius: 20px;
+    background-image: linear-gradient(-45deg,red 25%, blue 25%, blue 50%, red 50%, red 75%, blue 75%, blue);
+    background-size: 60px 60px;
+    animation: load 1s infinite linear;
+}
+
+@keyframes load {
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 60px 60px;
+    }
+}
+
+.timer{
+    text-align:center; 
+    background-color: black;
+    border: 2px yellow solid;
+    border-radius: 15px;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+}

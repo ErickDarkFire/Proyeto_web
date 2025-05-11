@@ -1,0 +1,32 @@
+body, html {
+    background: #29272B;
+    color: white;
+}
+.btn_tc{
+    height: 50px;
+    background-color: black;
+    color: yellow;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color .15s ease-in-out, transform .15s ease-in-out;
+    line-height: 35px;
+}
+
+.btn_tc:hover  {
+    background-color:#7b2cbf;
+    border: 2px solid black;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

@@ -1,6 +1,6 @@
 <html lang="en">
     <head>
-        <title>Triviaverso</title>
+        <title>Triviaverso - Question</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -63,6 +63,15 @@
                 </ul>
             </div>
             <div class="space">
+                <div class="pt-4">
+                    <div class="timer" id="Timer">
+                        <b id="txtseg">20</b>
+                        <div><p>Segundos</p></div>
+                    </div>
+                    <div class="barra" id="barra">
+                        <span class="progreso" id="progress"></span>
+                    </div>
+                </div>
                 <div class="container mt-4">
                     <div class="row row-cols-1 g-4">
                         <div class="col">
@@ -113,6 +122,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
             <script>
                 document.getElementById('menu').addEventListener('click', ()=>{

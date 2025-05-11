@@ -1,0 +1,99 @@
+body{
+    background-color:darkslategray;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    /*background-color:red;*/
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+.timer{
+    text-align:center; 
+    background-color: black;
+    border: 2px yellow solid;
+    width: 20%;
+    border-radius: 15px;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+}
+b{
+    color: yellow;
+}
+.barra{
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    border: 5px black solid;
+    border-radius: 20px;
+    width: 80%;
+    height: 25px;
+    overflow: hidden;
+}
+.progreso{
+    display: block;
+    width: 0px;
+    height: 100%;
+    border-radius: 20px;
+    background-image: linear-gradient(-45deg,red 25%, blue 25%, blue 50%, red 50%, red 75%, blue 75%, blue);
+    background-size: 60px 60px;
+    animation: load 1s infinite linear;
+}
+
+@keyframes load {
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 60px 60px;
+    }
+}
+
+#contenedor_carga{
+    background-color: rgba(250,240,245,0.9);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    -webkit-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+    z-index: 10000;
+}
+
+#carga{
+    border: 20px solid black;
+    border-top-color: blue;
+    border-top-style: groove;
+    border-left-color: blue;
+    border-left-style: groove;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar{
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+}
