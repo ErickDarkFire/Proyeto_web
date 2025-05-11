@@ -108,6 +108,9 @@ function cargarPregunta() {
             }
         });
         window.respuestaCorrecta = data.rightAnswerIndex;
+
+        // Emitimos un evento personalizado para indicar que ya se cargo la pregunta
+        document.dispatchEvent(new Event('preguntaCargada'));
         })
         .catch(() => alert("No se pudo cargar la pregunta."));
 }

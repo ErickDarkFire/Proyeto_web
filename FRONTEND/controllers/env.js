@@ -36,4 +36,5 @@ function populateSidebar(){
         aprofile.href = "Profile.html"
     }
 }
-if(window.location.href != local_url + "login.html") populateSidebar();
+let sidebar = document.getElementById("sidebar");
+if(sidebar != undefined) populateSidebar();
