@@ -1,18 +1,44 @@
 //-----------IMPORTACIONES-----------//
 const mongoose = require('mongoose');
+const openAI = require("openai")
 const Question = require('../models/question.js');
 const User = require("../models/user");
 const {Mongoose} = require("mongoose");
 
 //-----------FUNCIONES CRUD-----------//
 function getNewQuestion(req, res) {
-    Question.findOne({topic : req.params.topic}).then((question) => {
-        if (question)
-            res.status(200).send(question);
-        else
-            res.status(404).send('Not Found');
+    if(!req.params.topic)
+        return res.status(400).send({"Error": "Topic Not Provided"});
+    openAIClient.responses.create({
+        model: "gpt-4o-mini",
+        input: `Para el tema "${req.params.topic}", genera una pregunta de opción múltiple en formato JSON. La pregunta debe ser clara y precisa, con 4 opciones de respuesta. Solo una de las opciones debe ser correcta. La salida debe ser únicamente un objeto JSON con las siguientes propiedades:
+                question: una pregunta relacionada con el tema.
+                options: un arreglo de 4 posibles respuestas. 
+                rightAnswerIndex: el índice (0 a 3) de la respuesta correcta dentro del arreglo. 
+                topic: el tema proporcionado. 
+                La salida debe tener el siguiente formato exacto:{
+                  "question": "Escribe aquí la pregunta",
+                  "options": [
+                    "Opción A",
+                    "Opción B",
+                    "Opción C",
+                    "Opción D"
+                  ],
+                  "rightAnswerIndex": índice_de_la_respuesta_correcta,
+                  "topic": "${req.params.topic}"
+                }
+                No proporciones explicaciones, comentarios, encabezados ni ningún texto adicional. Solo devuelve el JSON.`,
+    }).then(response => {
+        console.log(response.output_text);
+        let newQuestion = JSON.parse(response.output_text);
+        let newQuestionMongoose = Question(newQuestion);
+        newQuestionMongoose.save().then((newDoc) => {
+            res.status(200).send(newDoc);
+        }).catch((err) => {
+            res.status(500).send({"Error": err.message});
+        })
     }).catch((err) => {
-        res.status(500).send(err);
+        res.status(500).send({"Error": err.message});
     })
 }
 
