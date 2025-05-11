@@ -2,6 +2,6 @@
 BACKEND/node_modules
 BACKEND/.env
 FRONTEND/pruebas.HTTP
-FRONTEND/TIMER
-FRONTEND/TIMER/Timer.css
-FRONTEND/TIMER/Timer.html
+FRONTEND/views/Timer
+FRONTEND/views/Timer/Timer.css
+FRONTEND/views/Timer/Timer.html
