@@ -46,8 +46,8 @@ routerApi.get('/Profile.html', (req, res) => {
 routerApi.get('/Ruleta.html', (req, res) => {
     res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/Ruleta.html'));
 })
-routerApi.get('/TYC.html', (req, res) => {
-    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/TYC.html'));
+routerApi.get('/TerminosYCondiciones.html', (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../../FRONTEND/views/TerminosYCondiciones.html'));
 })
 
 //-----------EXPORTACIONES-----------//

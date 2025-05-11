@@ -9,7 +9,7 @@ let seleccionadas = [];
 
 function setRouellete(){
     seleccionadas = categorias.sort(() => 0.5 - Math.random()).slice(0, 5);
-    console.log("Categorías seleccionadas:", seleccionadas);
+    //console.log("Categorías seleccionadas:", seleccionadas);
     const ruleta = document.getElementById("ruleta");
     ruleta.innerHTML = "";
 
@@ -91,7 +91,7 @@ function cargarPregunta() {
     const params = new URLSearchParams(window.location.search);
     let categoria = params.get("categoria"); 
     categoria = categoria.replace(/\s+/g, "").toLowerCase();
-    console.log(categoria = categoria.replace(/\s+/g, ""));
+    //console.log(categoria = categoria.replace(/\s+/g, ""));
     fetch(`http://localhost:3000/questions/new/${categoria}`)
         .then(r => { if (!r.ok) throw new Error(); return r.json(); })
         .then(data => {

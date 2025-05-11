@@ -200,10 +200,6 @@ function login(){
     .then(user =>{
         if(user != undefined){
         sessionStorage.setItem('user', JSON.stringify(user));
-        /*let data = JSON.parse(sessionStorage.user);
-        console.log(data);
-        console.log(data._id);
-        console.log(data.name);*/
         window.location.href = local_url+'home.html';
         }
         
@@ -220,7 +216,6 @@ function register(){
     event.preventDefault();
     let data = new FormData(event.target);
     data.append('points', 0);
-    console.log(data);
     fetch('/users', {
         method: 'POST',
         headers: {
