@@ -28,6 +28,9 @@
             </nav>
         </header>
         <main>
+            <div id="contenedor_carga">
+                <div id="carga"></div>
+        </div>
             <div id="sidebar" class=" text-white position-fixed">
                 <ul class="nav nav-pills flex-column pt-3 flex-grow-1">
                     <li class="nav-item">
@@ -63,16 +66,18 @@
                 </ul>
             </div>
             <div class="space">
-                <div class="pt-4">
-                    <div class="timer" id="Timer">
-                        <b id="txtseg">20</b>
-                        <div><p>Segundos</p></div>
+                <div class="pt-3">
+                    <div class="container">
+                        <div class="timer" id="Timer">
+                            <span class="me-2" id="timer-text"><b id="txtseg">20</b> Seg.</span>
+                            <i class="bi bi-alarm fs-2"></i>
+                        </div>
+                        <div class="barra" id="barra">
+                            <span class="progreso" id="progress"></span>
                     </div>
-                    <div class="barra" id="barra">
-                        <span class="progreso" id="progress"></span>
                     </div>
                 </div>
-                <div class="container mt-4">
+                <div class="container mt-3">
                     <div class="row row-cols-1 g-4">
                         <div class="col">
                             <div class="card text-bg-dark h-100">
@@ -159,4 +164,5 @@
     </body>
     <script src="../controllers/env.js"></script>
     <script src="../controllers/question.js"></script>
+    <script src="./../controllers/Timer_controller.js"></script>
 </html>
