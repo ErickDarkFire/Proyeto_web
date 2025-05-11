@@ -34,18 +34,6 @@ const colores = [
     "#FFF700"
 ];
 
-function validateLogin(){
-    if(sessionStorage.user == null && (
-        window.location.href == local_url + '/Profile.html' ||
-        window.location.href == local_url + '/EditProfile.html' ||
-        window.location.href == local_url + '/leaderboard.html'
-    )){
-        alert("Favor de iniciar sesión");
-        window.location.href = local_url;
-    }
-}
-validateLogin();
-
 function init(){
     //console.log(JSON.parse(sessionStorage.getItem('user')));
     let user_account = null;
@@ -54,9 +42,9 @@ function init(){
     
     //Si estas en el leaderboard
     if(window.location.href == local_url+"leaderboard.html"){
-        if( user_account == undefined ){
-            alert("Favor de iniciar sesión para ver el leaderboard");
-            window.location.href = local_url + "home.html";
+        if( user_account == null ){
+            //alert("Favor de iniciar sesión para ver el leaderboard");
+            window.location.href = local_url + "login.html";
         }else{
             let ranking = document.getElementById("Ranking");
             if(ranking != undefined){
@@ -81,10 +69,11 @@ function init(){
     }
 
     //Si estas en el profile
-    if(window.location.href == local_url+"Profile.html"){
-        if( user_account == undefined ){
-            alert("Favor de iniciar sesión para acceder a tu perfil");
-            window.location.href = local_url + "home.html";
+    if(window.location.href == local_url + "profile.html"){
+        //console.log("Hay cuenta? : " + user_account);
+        if( user_account == null ){
+            //alert("Favor de iniciar sesión para acceder a tu perfil");
+            window.location.href = local_url + "login.html";
         }else{
             //obtenemos los componentes donde colocaremos la informacion
             let username = document.getElementById('username'),
@@ -175,9 +164,9 @@ function init(){
 
     //Si estas en el EditProfile
     if(window.location.href == local_url+"EditProfile.html"){
-        if( user_account == undefined ){
-            alert("Favor de iniciar sesión para acceder a editar tu perfil");
-            window.location.href = local_url + "home.html";
+        if( user_account == null ){
+            //alert("Favor de iniciar sesión para acceder a editar tu perfil");
+            window.location.href = local_url + "login.html";
         }else{
             let txtName = document.getElementById('txtName'),
                 cbcategoria = document.getElementById('cbcategoria'),
@@ -204,17 +193,20 @@ function login(){
         },
         body: JSON.stringify(Object.fromEntries(data.entries()))
     })
-    .then(response => {
-        if(!response.ok) alert("Correo y/o Contraseña incorrectos.");
+    .then(async response => {
+        if(response.status == 404) alert("Correo y/o Contraseña incorrectos.");
         else return response.json();
     })
     .then(user =>{
+        if(user != undefined){
         sessionStorage.setItem('user', JSON.stringify(user));
         /*let data = JSON.parse(sessionStorage.user);
         console.log(data);
         console.log(data._id);
         console.log(data.name);*/
         window.location.href = local_url+'home.html';
+        }
+        
     })
     .catch(err =>{
         console.log('No se encontro al usuario.');
