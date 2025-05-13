@@ -18,6 +18,19 @@ let userSchema = mongoose.Schema({
     points: {
         type: Number,
         required: true
+    },
+    message: {
+        type: String,
+        required: true
+    },
+    favourite_category: {
+        type: String,
+        enum: [
+            "Star Wars", "Marvel", "Dragon Ball", "Naruto", "One Piece", "Death Note",
+            "Pokemon", "Inazuma Eleven", "LeagueOfLegends", "Zelda", "Minecraft",
+            "Mario", "Halo", "GearsOfWar", "Bob Esponja"
+        ],
+        required: true
     }
 });
 let User = mongoose.model('User', userSchema);

@@ -11,8 +11,10 @@ function createUser(req, res) {
             email = req.body.email,
             password = req.body.password,
             confirmPassword = req.body["confirm_password"],
-            points = req.body.points;
-        if (!name || !email || !password || !confirmPassword || points === undefined || points === null || isNaN(points))
+            points = req.body.points,
+            message = req.body.message;
+            favourite_category = req.body.favourite_category;
+        if (!name || !email || !password || !confirmPassword || points === undefined || points === null || isNaN(points) || !message || !favourite_category)
             res.status(400).send({"Error": "One or more parameters are missing."});
         else if(password !== confirmPassword)
             res.status(400).send({"Error": "Passwords do not match."});
@@ -27,7 +29,9 @@ function createUser(req, res) {
                         name: name,
                         email: email,
                         password: password,
-                        points: points
+                        points: points,
+                        message: message,
+                        favourite_category: favourite_category
                     }
                     let newUserMongoose = User(newUser);
                     newUserMongoose.save().then((doc) => {
@@ -61,7 +65,7 @@ function getUserInfo(req, res) {
 function editUserInfo(req, res) {
     try {
         let id = req.params.id;
-        let validAttributes = ["name", "email", "password", "points"];
+        let validAttributes = ["name", "email", "password", "points", "message", "favourite_category"];
         let updateData = {};
         for (let attribute in req.body) {
             if (validAttributes.includes(attribute))
