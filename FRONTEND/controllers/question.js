@@ -3,7 +3,23 @@ const categorias = [
     "Pokemon", "Inazuma Eleven", "LeagueOfLegends", "Zelda", "Minecraft",
     "Mario", "Halo", "GearsOfWar", "Bob Esponja"
 ];
-const colores = ['#ff0059', '#105eee', '#ff0000', '#26d500', '#ffee00', '#8000ff'];
+const colores = [
+    "#FFE81F",
+    "#ED1D24",
+    "#F77F00",
+    "#F08C00",
+    "#1E90FF",
+    "#000000",
+    "#FFCB05",
+    "#FF6600",
+    "#C89B3C",
+    "#007C41",
+    "#6E8B3D",
+    "#E60012",
+    "#4B5320",
+    "#8B0000",
+    "#FFF700"
+];
 let rotationValue = 0;
 let seleccionadas = []; 
 

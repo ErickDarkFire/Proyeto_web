@@ -1,39 +1,3 @@
-const categorias = [
-    "Star-Wars", 
-    "Marvel", 
-    "Dragon-Ball",
-    "Naruto",
-    "One-Piece",
-    "Death-Note",
-    "Pokemon",
-    "Inazuma-Eleven",
-    "League-Of-Legends",
-    "Zelda",
-    "Minecraft",
-    "Mario",
-    "Halo",
-    "Gears-Of-War",
-    "Bob-Esponja"
-];
-
-const colores = [
-    "#FFE81F",
-    "#ED1D24",
-    "#F77F00",
-    "#F08C00",
-    "#1E90FF",
-    "#000000",
-    "#FFCB05",
-    "#FF6600",
-    "#C89B3C",
-    "#007C41",
-    "#6E8B3D",
-    "#E60012",
-    "#4B5320",
-    "#8B0000",
-    "#FFF700"
-];
-
 function init(){
     //console.log(JSON.parse(sessionStorage.getItem('user')));
     let user_account = null;
@@ -70,13 +34,10 @@ function init(){
 
     //Si estas en el profile
     if(window.location.href == local_url + "Profile.html"){
-        console.log("Hay cuenta? : " + sessionStorage.getItem('user'));
         if( user_account == null ){
             //alert("Favor de iniciar sesión para acceder a tu perfil");
             window.location.href = local_url + "login.html";
-            console.log("Registrate primero pelotudo");
         }else{
-            console.log("Relleando datos");
             //obtenemos los componentes donde colocaremos la informacion
             let username = document.getElementById('username'),
                 usermsg = document.getElementById('usermsg'),
@@ -105,16 +66,16 @@ function init(){
 
             //Obtenemos las preguntas que ya respondio
             getHistorial().then(questions =>{
+                arrQuest = questions.questions;
                 //creamos el formato de cada pregunta
                 let rowQuestions = document.getElementById('rowQuestions');
-                    if(questions.length > 0){
-                        questions.forEach(question => {
+                    if(arrQuest.length > 0){
+                        //Si el mensaje existe, lo quitamos por que ya estamos en una etiqueta que SI tiene tareas
+                        let prevmsg = document.getElementById('msg');
+                        if( prevmsg != undefined ) prevmsg.remove();
+                        arrQuest.forEach(question => {
                         getQuestionByID(question.question)
                         .then(result => {
-                            //Si el mensaje existe, lo quitamos por que ya estamos en una etiqueta que SI tiene tareas
-                            let prevmsg = document.getElementById('msg');
-                            if( prevmsg != undefined ) prevmsg.remove();
-
                             let row = document.createElement('div');
                             row.classList.add('col-12', 'col-sm-6', 'col-lg-4');
                             let quest = document.createElement('div');
@@ -125,6 +86,7 @@ function init(){
                             let preg = document.createElement('div');
                             preg.classList.add('me-3');
                             let b1 = document.createElement('b');
+                            b1.style.fontSize = "12px";
                             b1.innerText = result.question;
                             let p = document.createElement('p');
                             p.innerText = result.options[result.rightAnswerIndex];
@@ -147,7 +109,11 @@ function init(){
                             let b2 = document.createElement('b');
                             b2.innerText = 'Categoria: ';
                             let span = document.createElement('span');
-                            span.innerText = result.topic;
+                            let cat = result.topic;
+                            for (let i = 0; i < categorias.length; i++) {
+                                if( categorias[i].toLowerCase() === cat ) cat = categorias[i];
+                            }
+                            span.innerText = cat;
                             gen.append(b2,span);
 
                             quest.append(flex,gen);
