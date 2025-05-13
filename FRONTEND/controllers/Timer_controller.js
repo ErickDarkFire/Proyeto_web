@@ -8,7 +8,8 @@ function TimesUp(){
     seg--;
     document.getElementById('txtseg').innerHTML = seg < 10 ? '0' + seg : seg;
     if(seg <= 0){
-        alert('Se acabo el tiempo!');
+        //alert('Se acabo el tiempo!');
+        validarRespuesta(-1);
         seg = 0;
         clearInterval(CountDownID);
         return;
@@ -18,15 +19,16 @@ function IncreaseBar(){
     let bar = document.getElementById('progress');
     if (progressPercent >= 100) {
         bar.style.width = "100%";
-        alert("Barra completada en el seg: " + seg);
+        //alert("Barra completada en el seg: " + seg);
         clearInterval(progressBarID);
         return;
     }
     progressPercent += stepPercent;
     bar.style.width = progressPercent + "%";
 }
+
 document.addEventListener('preguntaCargada', () => {
-    console.log("Pregunta cargada. ¡Ahora empiezo el temporizador!");
+    //console.log("Pregunta cargada. ¡Ahora empiezo el temporizador!");
     let contenedor = document.getElementById('contenedor_carga');
     contenedor.style.visibility = 'hidden';
     contenedor.style.opacity = '0';

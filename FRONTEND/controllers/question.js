@@ -161,6 +161,18 @@ function mostrarProgresoRonda() {
     }
 }
 
+async function getQuestionByID(idQuestion){
+    let his = await fetch('/questions/byID/' + idQuestion, {
+        method: 'GET'
+    }).then(async (response) => {
+        if(!response.ok) alert(await response.text());
+        return await response.json();
+    }).catch(err =>{
+        console.error("Fallo al obtener la pregunta por ID: " + err)
+    });
+    return his;
+}
+
 function init(){
     if (!localStorage.getItem('rondaActual')) {
         localStorage.setItem('rondaActual', 1);

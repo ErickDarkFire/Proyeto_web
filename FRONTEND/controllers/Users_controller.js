@@ -38,7 +38,7 @@ function init(){
     //console.log(JSON.parse(sessionStorage.getItem('user')));
     let user_account = null;
     //Comprobamos si esta registrdo on una cuenta
-    if(sessionStorage.getItem('user') != null ) user_account = JSON.parse(sessionStorage.user);
+    if(sessionStorage.getItem('user') != null ) user_account = JSON.parse(sessionStorage.getItem('user'));
     
     //Si estas en el leaderboard
     if(window.location.href == local_url+"leaderboard.html"){
@@ -69,12 +69,14 @@ function init(){
     }
 
     //Si estas en el profile
-    if(window.location.href == local_url + "profile.html"){
-        //console.log("Hay cuenta? : " + user_account);
+    if(window.location.href == local_url + "Profile.html"){
+        console.log("Hay cuenta? : " + sessionStorage.getItem('user'));
         if( user_account == null ){
             //alert("Favor de iniciar sesión para acceder a tu perfil");
             window.location.href = local_url + "login.html";
+            console.log("Registrate primero pelotudo");
         }else{
+            console.log("Relleando datos");
             //obtenemos los componentes donde colocaremos la informacion
             let username = document.getElementById('username'),
                 usermsg = document.getElementById('usermsg'),
@@ -84,27 +86,31 @@ function init(){
                 userrank = document.getElementById('userrank'),
                 useraciertos = document.getElementById('useraciertos');
 
-                //Colocamos los datos del usuario
-                username.innerText = user_account.name;
-                usermsg.innerHTML = '<b>Mensaje:</b> ' + user_account.message;
-                useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
-                usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.catfav;
-                userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
-                userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
-                useraciertos.innerHTML = '<b>Aciertos:</b> ' + user_account.aciertos;
-                
-                //dependiendo la categoria favorita, cambiamos el color del banner
-                let banner = document.getElementById('banner');
-                for (let i = 0; i < categorias.length; i++) {
-                    if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = colores[i];
-                }
+            //Colocamos los datos del usuario
+            username.innerText = user_account.name;
+            usermsg.innerHTML = '<b>Mensaje:</b> ' + user_account.message;
+            useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
+            usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.catfav;
+            userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
+            userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
+            const ac = document.getElementsByClassName("right");
+            //console.log(ac.length);
+            useraciertos.innerHTML = '<b>Aciertos:</b> ' + (ac.length > 0 ? ac.length : '0');
+            
+            //dependiendo la categoria favorita, cambiamos el color del banner
+            let banner = document.getElementById('banner');
+            for (let i = 0; i < categorias.length; i++) {
+                if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = colores[i];
+            }
 
-                //Obtenemos las preguntas que ya respondio
-                getHistorial().then(questions =>{
-                    questions.forEach(question => {
-                        //creamos el formato de cada pregunta
-                        let rowQuestions = document.getElementById('rowQuestions');
-                        if(questions.length > 0){
+            //Obtenemos las preguntas que ya respondio
+            getHistorial().then(questions =>{
+                //creamos el formato de cada pregunta
+                let rowQuestions = document.getElementById('rowQuestions');
+                    if(questions.length > 0){
+                        questions.forEach(question => {
+                        getQuestionByID(question.question)
+                        .then(result => {
                             //Si el mensaje existe, lo quitamos por que ya estamos en una etiqueta que SI tiene tareas
                             let prevmsg = document.getElementById('msg');
                             if( prevmsg != undefined ) prevmsg.remove();
@@ -119,9 +125,9 @@ function init(){
                             let preg = document.createElement('div');
                             preg.classList.add('me-3');
                             let b1 = document.createElement('b');
-                            b1.innerText = question.descripcion;
+                            b1.innerText = result.question;
                             let p = document.createElement('p');
-                            p.innerText = question.answer;
+                            p.innerText = result.options[result.rightAnswerIndex];
                             preg.append(b1,p);
 
                             let i = document.createElement('i');
@@ -141,23 +147,25 @@ function init(){
                             let b2 = document.createElement('b');
                             b2.innerText = 'Categoria: ';
                             let span = document.createElement('span');
-                            span.innerText = question.categoria;
+                            span.innerText = result.topic;
                             gen.append(b2,span);
 
                             quest.append(flex,gen);
                             row.append(quest);
                             //Pegamos todo el contenido de la pregunta dentro del contenedor
                             rowQuestions.append(row);
-                        }else{
-                            let mensaje = document.createElement('p');
-                            mensaje.id = 'msg';
-                            mensaje.style.color = "white";
-                            mensaje.style.textAlign = 'center';
-                            mensaje.innerText = '\nJuega una partida para empezar tu historial!.';
-                            //Si el mensaje no existe todavia, lo agregamos evitando repeticiones
-                            if( document.getElementById('msg') == undefined ) rowQuestions.append(mensaje);
-                        }
-                    });
+                        })
+                        .catch(err => console.log("Error al insertar en el historial: " + err) );
+                        });
+                    }else{
+                        let mensaje = document.createElement('p');
+                        mensaje.id = 'msg';
+                        mensaje.style.color = "yellow";
+                        mensaje.style.textAlign = 'center';
+                        mensaje.innerText = '\nJuega una partida para empezar tu historial!.';
+                        //Si el mensaje no existe todavia, lo agregamos evitando repeticiones
+                        if( document.getElementById('msg') == undefined ) rowQuestions.append(mensaje);
+                    }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
         }
     }
