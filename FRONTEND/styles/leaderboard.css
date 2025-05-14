@@ -1,6 +1,9 @@
 .content{
     margin-left:60px;
     transition:margin-left .3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 87vh;
 }
 
 body{
