@@ -51,7 +51,7 @@ function init(){
             username.innerText = user_account.name;
             usermsg.innerHTML = '<b>Mensaje:</b> ' + user_account.message;
             useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
-            usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.catfav;
+            usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.favourite_category;
             userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
             userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
             const ac = document.getElementsByClassName("right");
@@ -61,7 +61,7 @@ function init(){
             //dependiendo la categoria favorita, cambiamos el color del banner
             let banner = document.getElementById('banner');
             for (let i = 0; i < categorias.length; i++) {
-                if( categorias[i] === user_account.catfav ) banner.style.backgroundColor = colores[i];
+                if( categorias[i] === user_account.favourite_category ) banner.style.backgroundColor = colores[i];
             }
 
             //Obtenemos las preguntas que ya respondio
@@ -149,7 +149,7 @@ function init(){
                 txtConfpass = document.getElementById('txtConfpass');
             txtName.value = user_account.name;
             txtmsg.value = user_account.message;
-            cbcategoria.value = user_account.catfav;
+            cbcategoria.value = user_account.favourite_category;
             txtpass.value = user_account.password;
         }
     }

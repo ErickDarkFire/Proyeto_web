@@ -12,8 +12,8 @@ function createUser(req, res) {
             password = req.body.password,
             confirmPassword = req.body["confirm_password"],
             points = req.body.points,
-            message = req.body.message;
-            favourite_category = req.body.favourite_category;
+            message = "Hola! Soy un usuario nuevo.";
+            favourite_category = "Bob Esponja";
         if (!name || !email || !password || !confirmPassword || points === undefined || points === null || isNaN(points) || !message || !favourite_category)
             res.status(400).send({"Error": "One or more parameters are missing."});
         else if(password !== confirmPassword)

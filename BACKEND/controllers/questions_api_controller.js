@@ -4,7 +4,7 @@ const openAI = require("openai")
 const Question = require('../models/question.js');
 const User = require("../models/user");
 const {Mongoose} = require("mongoose");
-const openAIClient = new openAI({apiKey: "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"});
+const openAIClient = new openAI({apiKey:"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"});
 
 //-----------FUNCIONES CRUD-----------//
 function getNewQuestion(req, res) {
@@ -30,7 +30,7 @@ function getNewQuestion(req, res) {
                 }
                 No proporciones explicaciones, comentarios, encabezados ni ningún texto adicional. Solo devuelve el JSON.`,
     }).then(response => {
-        console.log(response.output_text);
+        //console.log(response.output_text);
         let newQuestion = JSON.parse(response.output_text);
         let newQuestionMongoose = Question(newQuestion);
         newQuestionMongoose.save().then((newDoc) => {
