@@ -29,6 +29,14 @@ function init(){
                     }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
             }
+            let tbPos = document.getElementById('tbPos');
+            let tbName = document.getElementById('tbName');
+            let tbPts = document.getElementById('tbPts');
+            getRank().then(pos => {
+                tbPos.innerText = pos;
+            });
+            tbName.innerText = JSON.parse(sessionStorage.user).name;
+            tbPts.innerText = JSON.parse(sessionStorage.user).points + ' pts';
         }
     }
 
@@ -249,6 +257,26 @@ async function getRanking(){
         console.error("Fallo al obtener el top de usuarios: " + err)
     });
     return record;
+}
+
+async function getRank(){
+    let rank = 10000;
+    return fetch('/rank?top=10000',{
+        method : 'GET'
+    }).then(async (response) => {
+        if(!response.ok) alert(await response.text());
+        return await response.json();
+    }).then(allUsers => {
+        allUsers.sort((a,b) => b.points - a.points);
+        for (let i = 0; i < allUsers.length; i++) {
+            if( allUsers[i]._id == JSON.parse(sessionStorage.user)._id){
+                rank = i;
+                return rank;
+            }
+        }
+    }).catch(err =>{
+        console.error("Fallo al obtener TU rango: " + err)
+    });
 }
 
 function user_update(){

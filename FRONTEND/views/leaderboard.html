@@ -50,28 +50,42 @@
                 </ul>
             </div>
             
-            <div class="content flex-grow-1 p-4">
-                    <h1 class="text-center mb-4 purple">Tabla de puntuaciones</h1>
+            <div class="content flex-grow-1 p-3 pt-2">
+                
+                <h1 class="text-center mb-4 purple">Tabla de puntuaciones</h1>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="col-2 text-center">Posición</th>
+                                <th class="col-6">Nombre</th>
+                                <th class="col-4 text-center">Puntuación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Ranking">
+                            <!-- <tr>
+                                <td class="text-center">1</td>
+                                <td>Niaden</td>
+                                <td class="text-end">1500</td>
+                            </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-auto">
+                    <!-- <h3 class="text-center purple">Tu posicion:</h3> -->
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped align-middle mb-0">
+                        <table class="table table-dark table-striped border border-2 border-warning rounded-5 overflow-hidden">
                             <thead>
                                 <tr>
-                                    <th class="col-2 text-center">Posición</th>
-                                    <th class="col-6">Nombre</th>
-                                    <th class="col-4 text-end">Puntuación</th>
+                                    <th class="col-2 text-center text-warning" id="tbPos">?</th>
+                                    <th class="col-6" id="tbName">Nombre</th>
+                                    <th class="col-4 text-center text-warning" id="tbPts">?? pts</th>
                                 </tr>
                             </thead>
-                            <tbody id="Ranking">
-                               <!-- <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Niaden</td>
-                                    <td class="text-end">1500</td>
-                                </tr>-->
-                            </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+                 </div>
+
         </div>
         <script>
             document.getElementById('menu').addEventListener('click', ()=>{
