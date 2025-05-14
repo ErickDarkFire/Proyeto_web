@@ -136,6 +136,9 @@ function guardarRecordSiEsMayor (nuevoScore) {
         const recordAnterior = user.points;
     if (nuevoScore > recordAnterior) {
         console.log(`Nuevo récord! ${nuevoScore} > ${recordAnterior}`);
+        let user = JSON.parse(sessionStorage.getItem('user'));
+        user.points = nuevoScore;
+        sessionStorage.setItem('user', JSON.stringify(user));
         return fetch(`/users/${id}`, {
             method : 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -182,8 +185,11 @@ function cargarPregunta() {
                 btn.querySelector('span').textContent = op;
                 btn.addEventListener('click', () => validarRespuesta(i));
             }
+            window.question_id = data._id;
         });
         window.respuestaCorrecta = data.rightAnswerIndex;
+
+        //Guardamos la pregunta en la bd
 
         // Emitimos un evento personalizado para indicar que ya se cargo la pregunta
         document.dispatchEvent(new Event('preguntaCargada'));
@@ -196,7 +202,6 @@ function validarRespuesta(indiceSeleccionado) {
     clearInterval(CountDownID);
     clearInterval(progressBarID);
     const correcta = window.respuestaCorrecta;
-    
     const puntos = (indiceSeleccionado === correcta)
         ? Math.round((seg / 20) * 100)
         : 0;
@@ -210,12 +215,41 @@ function validarRespuesta(indiceSeleccionado) {
         ? `✅ ¡Respuesta correcta! (+${puntos} pts)`
         : "❌ Respuesta incorrecta (0 pts)";
 
+    let res = (indiceSeleccionado === correcta)
+        ? true : false;
     document.getElementById("textoResultado").textContent = texto;
-
+    // Guardamos la pregunta en el historial del jugador que esta participando
+    GuardarEnHistorial(res);
     const modalElement = document.getElementById('resultadoModal');
     const modal        = bootstrap.Modal.getOrCreateInstance(modalElement);
     incrementarRonda();
     modal.show();
+}
+
+function GuardarEnHistorial(ans){
+    let data = {
+        question: window.question_id,
+        correct: ans
+    }
+    //Lo agregarmos en la historia del usuario con la sesion abierta
+    fetch('/histories/' + JSON.parse(sessionStorage.user)._id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(async (response) => {
+        if(!response.ok) alert(await response.text()); 
+        return response.json();
+    })
+    .catch(err => {
+        console.log("Fallo al agregar al historial: " + err);
+    });
+
+    //Limpiamos variable global
+    window.question_id = '';
+
 }
 
 function setMatch(){

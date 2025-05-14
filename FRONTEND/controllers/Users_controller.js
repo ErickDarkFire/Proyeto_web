@@ -54,6 +54,7 @@ function init(){
                 userpts = document.getElementById('userpts'),
                 userrank = document.getElementById('userrank'),
                 useraciertos = document.getElementById('useraciertos');
+            let aciertos = 0;
 
             //Colocamos los datos del usuario
             username.innerText = user_account.name;
@@ -61,10 +62,9 @@ function init(){
             useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
             usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.favourite_category;
             userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
-            userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
-            const ac = document.getElementsByClassName("right");
-            //console.log(ac.length);
-            useraciertos.innerHTML = '<b>Aciertos:</b> ' + (ac.length > 0 ? ac.length : '0');
+            getRank().then(pos => {
+                userrank.innerHTML = '<b>Ranking:</b> ' + pos;
+            });
             
             //dependiendo la categoria favorita, cambiamos el color del banner
             let banner = document.getElementById('banner');
@@ -102,13 +102,14 @@ function init(){
 
                             let i = document.createElement('i');
                             i.classList.add('bi','fs-1');
-                            if(question.status != true){
+                            if(question.correct != true){
                                 quest.classList.add('wrong');
                                 i.classList.add('bi-x-circle');
                             } 
                             else{
                                 quest.classList.add('right');
                                 i.classList.add('bi-check-circle');
+                                aciertos +=1;
                             } 
                             flex.append(preg,i);
 
@@ -128,6 +129,9 @@ function init(){
                             row.append(quest);
                             //Pegamos todo el contenido de la pregunta dentro del contenedor
                             rowQuestions.append(row);
+
+                            //Por ultimo, comprobamos los acierto:
+                            useraciertos.innerHTML = '<b>Aciertos:</b> ' + aciertos;
                         })
                         .catch(err => console.log("Error al insertar en el historial: " + err) );
                         });
@@ -139,6 +143,9 @@ function init(){
                         mensaje.innerText = '\nJuega una partida para empezar tu historial!.';
                         //Si el mensaje no existe todavia, lo agregamos evitando repeticiones
                         if( document.getElementById('msg') == undefined ) rowQuestions.append(mensaje);
+
+                        //Por ultimo, comprobamos los acierto:
+                        useraciertos.innerHTML = '<b>Aciertos:</b> 0';
                     }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
         }

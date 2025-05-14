@@ -4,11 +4,7 @@ const openAI = require("openai")
 const Question = require('../models/question.js');
 const User = require("../models/user");
 const {Mongoose} = require("mongoose");
-<<<<<<< HEAD
-const openAIClient = new openAI({apiKey:"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"});
-=======
-const openAIClient = new openAI({apiKey:"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"});
->>>>>>> b62e3bc8050ae70f8a9d6c9730add1085c8acd90
+const openAIClient = new openAI({apiKey:"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"});
 
 //-----------FUNCIONES CRUD-----------//
 function getNewQuestion(req, res) {

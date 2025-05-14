@@ -31,3 +31,17 @@ body{
 .table-dark tbody+tbody{
     border-top:2px solid #6f42c1;
 }
+
+#tb2{
+    width: 90%;
+}
+
+#tb2:hover{
+    transform: scale(1.05);
+    transition: background-color .15s ease-in-out, transform .15s ease-in-out;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
