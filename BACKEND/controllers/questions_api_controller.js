@@ -4,7 +4,7 @@ const openAI = require("openai")
 const Question = require('../models/question.js');
 const User = require("../models/user");
 const {Mongoose} = require("mongoose");
-const openAIClient = new openAI({apiKey: "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"});
+const openAIClient = new openAI({apiKey: "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"});
 
 //-----------FUNCIONES CRUD-----------//
 function getNewQuestion(req, res) {
