@@ -4,7 +4,7 @@ const openAI = require("openai")
 const Question = require('../models/question.js');
 const User = require("../models/user");
 const {Mongoose} = require("mongoose");
-const openAIClient = new openAI({apiKey:"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"});
+const openAIClient = new openAI({apiKey:"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"});
 
 //-----------FUNCIONES CRUD-----------//
 function getNewQuestion(req, res) {
@@ -12,7 +12,7 @@ function getNewQuestion(req, res) {
         return res.status(400).send({"Error": "Topic Not Provided"});
     openAIClient.responses.create({
         model: "gpt-4o-mini",
-        input: `Para el tema "${req.params.topic}", genera una pregunta de opción múltiple en formato JSON. La pregunta debe ser clara y precisa, con 4 opciones de respuesta. Solo una de las opciones debe ser correcta. La salida debe ser únicamente un objeto JSON con las siguientes propiedades:
+        input: `Para el tema "${req.params.topic}", genera una pregunta de opción múltiple que no se repita y dificiles en formato JSON. La pregunta debe ser clara y precisa, con 4 opciones de respuesta. Solo una de las opciones debe ser correcta. La salida debe ser únicamente un objeto JSON con las siguientes propiedades:
                 question: una pregunta relacionada con el tema.
                 options: un arreglo de 4 posibles respuestas. 
                 rightAnswerIndex: el índice (0 a 3) de la respuesta correcta dentro del arreglo. 

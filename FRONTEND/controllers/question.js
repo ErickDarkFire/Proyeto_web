@@ -4,28 +4,30 @@ const categorias = [
     "Mario", "Halo", "GearsOfWar", "Bob Esponja"
 ];
 const colores = [
-    "#FFE81F",
-    "#ED1D24",
-    "#F77F00",
-    "#F08C00",
-    "#1E90FF",
-    "#000000",
-    "#FFCB05",
-    "#FF6600",
-    "#C89B3C",
-    "#007C41",
-    "#6E8B3D",
-    "#E60012",
-    "#4B5320",
-    "#8B0000",
-    "#FFF700"
+    "#FF5733", 
+    "#C70039", 
+    "#900C3F", 
+    "#581845", 
+    "#1F618D", 
+    "#154360", 
+    "#117864", 
+    "#229954", 
+    "#A04000", 
+    "#884EA0", 
+    "#2C3E50", 
+    "#E67E22", 
+    "#D35400", 
+    "#34495E", 
+    "#7D3C98"  
 ];
+
 let rotationValue = 0;
-let seleccionadas = []; 
+let seleccionadas = [];
+let coloresSeleccionados = []; 
 
 function setRouellete(){
     seleccionadas = categorias.sort(() => 0.5 - Math.random()).slice(0, 5);
-    //console.log("Categorías seleccionadas:", seleccionadas);
+    coloresSeleccionados = colores.sort(() => 0.5 - Math.random()).slice(0, 5);
     const ruleta = document.getElementById("ruleta");
     ruleta.innerHTML = "";
 
@@ -33,7 +35,7 @@ function setRouellete(){
         const div = document.createElement("div");
         div.className = "category";
         div.style.setProperty('--i', i + 1);
-        div.style.setProperty('--clr', colores[i % colores.length]);
+        div.style.setProperty('--clr', coloresSeleccionados[i % coloresSeleccionados.length]);
         div.innerHTML = `<span>${categoria}</span>`;
         ruleta.appendChild(div);        
     });
@@ -81,14 +83,72 @@ function incrementarRonda() {
 }
 
 function verificarFinDeJuego() {
-    const total = parseInt(localStorage.getItem('totalRondas'), 10);
-    const actual = parseInt(localStorage.getItem('rondaActual'), 10);
+    const total  = Number(localStorage.getItem('totalRondas'));
+    const actual = Number(localStorage.getItem('rondaActual'));
+
     if (actual > total) {
-        localStorage.removeItem('rondaActual');
-        localStorage.removeItem('totalRondas');
-        window.location.href = 'Home.html'; 
+        const scores = JSON.parse(localStorage.getItem('scores'));
+        const totalJugadores = Number(localStorage.getItem('totalJugadores'));
+        let html = '';
+        if (totalJugadores === 1) {
+            html = `Obtuviste ${scores[0]} puntos`;
+        } else {
+            html = '<h5 class="mb-3">Puntuación final</h5><ul class="list-unstyled">';
+            scores.forEach((sc, i) => {
+                html += `<li>Jugador ${i + 1}: <strong>${sc} pts</strong></li>`;
+            });
+            html += '</ul>';
+        }
+        document.getElementById('textoScoreFinal').innerHTML = html;
+        const modalScore = bootstrap.Modal.getOrCreateInstance(
+            document.getElementById('finalScoreModal')
+        );
+        modalScore.show();
+
+        if (totalJugadores === 1) {
+            const scores = JSON.parse(localStorage.getItem('scores') || '[0]');
+            const scoreFinal = scores[0];
+            guardarRecordSiEsMayor(scoreFinal);
+        }
+
+        modalScore._element.querySelector('#btnBackHome').addEventListener('click', () => window.location.href='Home.html', { once:true });
+        ['rondaActual','totalRondas','scores','score','rondaActualReal','turno'].forEach(k => localStorage.removeItem(k));
+
+        return true;
     }
+    return false;
 }
+
+function guardarRecordSiEsMayor (nuevoScore) {
+    const userJSON = sessionStorage.getItem('user');
+    if (!userJSON) {
+    console.error('Usuario no encontrado en sessionStorage');
+        return;
+    }
+    const id = JSON.parse(userJSON)._id;
+    if (!id) { console.error('ID de usuario no encontrado en sessionStorage'); return; }
+    fetch(`/users/${id}`, { method: 'GET' })
+    .then(resp => {
+        if (!resp.ok) return resp.text().then(tx => Promise.reject(tx));
+        return resp.json();
+    })
+    .then(user => {
+        const recordAnterior = user.points;
+    if (nuevoScore > recordAnterior) {
+        console.log(`Nuevo récord! ${nuevoScore} > ${recordAnterior}`);
+        return fetch(`/users/${id}`, {
+            method : 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body   : JSON.stringify({ points: nuevoScore })
+        });
+        } else {
+        console.log(`Puntaje ${nuevoScore} no supera el récord ${recordAnterior}`);
+        }
+    })
+    .catch(err => console.error('Error GET/PATCH bestScore:', err));
+}
+
+
 
 function ruleta(){
     const modal = bootstrap.Modal.getInstance(document.getElementById('resultadoModal'));
@@ -136,17 +196,26 @@ function validarRespuesta(indiceSeleccionado) {
     clearInterval(CountDownID);
     clearInterval(progressBarID);
     const correcta = window.respuestaCorrecta;
+    
+    const puntos = (indiceSeleccionado === correcta)
+        ? Math.round((seg / 20) * 100)
+        : 0;
+
+    const scores = JSON.parse(localStorage.getItem('scores'));
+    const turno  = Number(localStorage.getItem('turno')) || 1;
+    scores[turno - 1] += puntos;
+    localStorage.setItem('scores', JSON.stringify(scores));
 
     const texto = (indiceSeleccionado === correcta)
-        ? "✅ ¡Respuesta correcta!"
-        : "❌ Respuesta incorrecta.";
+        ? `✅ ¡Respuesta correcta! (+${puntos} pts)`
+        : "❌ Respuesta incorrecta (0 pts)";
 
     document.getElementById("textoResultado").textContent = texto;
 
-    const modal = new bootstrap.Modal(document.getElementById("resultadoModal"));
-    modal.show();
+    const modalElement = document.getElementById('resultadoModal');
+    const modal        = bootstrap.Modal.getOrCreateInstance(modalElement);
     incrementarRonda();
-    verificarFinDeJuego();
+    modal.show();
 }
 
 function setMatch(){
@@ -165,6 +234,7 @@ function setMatch(){
         localStorage.setItem('rondasReales', rondas*totalJugadores);
         localStorage.setItem('rondaActualReal', 1);
         localStorage.setItem('turno',1)
+        localStorage.setItem('scores', JSON.stringify(Array(totalJugadores).fill(0)));
         window.location.href = 'Ruleta.html';
     } else {
         alert('Por favor ingresa un número válido de rondas.');
@@ -210,5 +280,14 @@ init();
 document.getElementById('spinBtn')?.addEventListener('click', spinRoullete);
 document.querySelector(".wheel")?.addEventListener("transitionend", transicion);
 document.getElementById('AceptarCategoria')?.addEventListener('click', play);
-document.getElementById('AceptarRuleta')?.addEventListener('click', ruleta);
 document.getElementById('btnContinuar')?.addEventListener('click',setMatch);
+document.getElementById('AceptarRuleta')?.addEventListener('click', () => {
+    if (!verificarFinDeJuego()) {  
+        ruleta();                
+    }
+});
+modalScore._element.querySelector('#btnBackHome')
+        .addEventListener('click', () => {
+            window.location.href = 'Home.html';
+        }, { once: true });
+
