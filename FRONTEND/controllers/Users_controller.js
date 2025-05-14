@@ -270,7 +270,7 @@ async function getRank(){
         allUsers.sort((a,b) => b.points - a.points);
         for (let i = 0; i < allUsers.length; i++) {
             if( allUsers[i]._id == JSON.parse(sessionStorage.user)._id){
-                rank = i;
+                rank = i + 1;
                 return rank;
             }
         }
