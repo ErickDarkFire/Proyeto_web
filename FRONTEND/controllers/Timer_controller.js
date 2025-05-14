@@ -11,7 +11,7 @@ function TimesUp(){
         //alert('Se acabo el tiempo!');
         validarRespuesta(-1);
         seg = 0;
-        clearInterval(CountDownID);
+        //clearInterval(CountDownID);
         return;
     }
 }
@@ -20,7 +20,7 @@ function IncreaseBar(){
     if (progressPercent >= 100) {
         bar.style.width = "100%";
         //alert("Barra completada en el seg: " + seg);
-        clearInterval(progressBarID);
+        //clearInterval(progressBarID);
         return;
     }
     progressPercent += stepPercent;

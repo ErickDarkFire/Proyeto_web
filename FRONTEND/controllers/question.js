@@ -132,6 +132,9 @@ function cargarPregunta() {
 }
 
 function validarRespuesta(indiceSeleccionado) {
+    //detenemos los timer al responder
+    clearInterval(CountDownID);
+    clearInterval(progressBarID);
     const correcta = window.respuestaCorrecta;
 
     const texto = (indiceSeleccionado === correcta)
