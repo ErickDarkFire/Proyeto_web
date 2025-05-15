@@ -105,7 +105,7 @@ function verificarFinDeJuego() {
         );
         modalScore.show();
 
-        if (totalJugadores === 1) {
+        if (totalJugadores === 1 && JSON.parse(sessionStorage.getItem('user')) != undefined){
             const scores = JSON.parse(localStorage.getItem('scores') || '[0]');
             const scoreFinal = scores[0];
             guardarRecordSiEsMayor(scoreFinal);
@@ -219,7 +219,7 @@ function validarRespuesta(indiceSeleccionado) {
         ? true : false;
     document.getElementById("textoResultado").textContent = texto;
     // Guardamos la pregunta en el historial del jugador que esta participando
-    GuardarEnHistorial(res);
+    if( JSON.parse(sessionStorage.getItem('user')) != undefined) GuardarEnHistorial(res);
     const modalElement = document.getElementById('resultadoModal');
     const modal        = bootstrap.Modal.getOrCreateInstance(modalElement);
     incrementarRonda();
