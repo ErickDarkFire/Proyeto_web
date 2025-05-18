@@ -29,6 +29,14 @@ function init(){
                     }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
             }
+            let tbPos = document.getElementById('tbPos');
+            let tbName = document.getElementById('tbName');
+            let tbPts = document.getElementById('tbPts');
+            getRank().then(pos => {
+                tbPos.innerText = pos;
+            });
+            tbName.innerText = JSON.parse(sessionStorage.user).name;
+            tbPts.innerText = JSON.parse(sessionStorage.user).points + ' pts';
         }
     }
 
@@ -46,6 +54,7 @@ function init(){
                 userpts = document.getElementById('userpts'),
                 userrank = document.getElementById('userrank'),
                 useraciertos = document.getElementById('useraciertos');
+            let aciertos = 0;
 
             //Colocamos los datos del usuario
             username.innerText = user_account.name;
@@ -53,10 +62,9 @@ function init(){
             useremail.innerHTML = '<b>Correo:</b> ' + user_account.email;
             usercatfav.innerHTML = '<b>Categoria favorita:</b> ' + user_account.favourite_category;
             userpts.innerHTML = '<b>Máximo puntaje:</b> ' +user_account.points;
-            userrank.innerHTML = '<b>Ranking:</b> ' + user_account.rank;
-            const ac = document.getElementsByClassName("right");
-            //console.log(ac.length);
-            useraciertos.innerHTML = '<b>Aciertos:</b> ' + (ac.length > 0 ? ac.length : '0');
+            getRank().then(pos => {
+                userrank.innerHTML = '<b>Ranking:</b> ' + pos;
+            });
             
             //dependiendo la categoria favorita, cambiamos el color del banner
             let banner = document.getElementById('banner');
@@ -94,13 +102,14 @@ function init(){
 
                             let i = document.createElement('i');
                             i.classList.add('bi','fs-1');
-                            if(question.status != true){
+                            if(question.correct != true){
                                 quest.classList.add('wrong');
                                 i.classList.add('bi-x-circle');
                             } 
                             else{
                                 quest.classList.add('right');
                                 i.classList.add('bi-check-circle');
+                                aciertos +=1;
                             } 
                             flex.append(preg,i);
 
@@ -120,6 +129,9 @@ function init(){
                             row.append(quest);
                             //Pegamos todo el contenido de la pregunta dentro del contenedor
                             rowQuestions.append(row);
+
+                            //Por ultimo, comprobamos los acierto:
+                            useraciertos.innerHTML = '<b>Aciertos:</b> ' + aciertos;
                         })
                         .catch(err => console.log("Error al insertar en el historial: " + err) );
                         });
@@ -131,6 +143,9 @@ function init(){
                         mensaje.innerText = '\nJuega una partida para empezar tu historial!.';
                         //Si el mensaje no existe todavia, lo agregamos evitando repeticiones
                         if( document.getElementById('msg') == undefined ) rowQuestions.append(mensaje);
+
+                        //Por ultimo, comprobamos los acierto:
+                        useraciertos.innerHTML = '<b>Aciertos:</b> 0';
                     }
                 }).catch(err => {console.log('Error al obtener el historial del usuario: ' + err);});
         }
@@ -249,6 +264,26 @@ async function getRanking(){
         console.error("Fallo al obtener el top de usuarios: " + err)
     });
     return record;
+}
+
+async function getRank(){
+    let rank = 10000;
+    return fetch('/rank?top=10000',{
+        method : 'GET'
+    }).then(async (response) => {
+        if(!response.ok) alert(await response.text());
+        return await response.json();
+    }).then(allUsers => {
+        allUsers.sort((a,b) => b.points - a.points);
+        for (let i = 0; i < allUsers.length; i++) {
+            if( allUsers[i]._id == JSON.parse(sessionStorage.user)._id){
+                rank = i + 1;
+                return rank;
+            }
+        }
+    }).catch(err =>{
+        console.error("Fallo al obtener TU rango: " + err)
+    });
 }
 
 function user_update(){
